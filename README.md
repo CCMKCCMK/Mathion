@@ -1,10 +1,10 @@
-# MathVisionPro
+# Mathion
 
-MathVisionPro is an innovative iOS application that integrates a math formula keyboard with advanced visual input control. Users can enter mathematical expressions, see live LaTeX-rendered output, and interact with the app using either voice commands or eye control (through AR face tracking).
+Mathion is an innovative Vision OS application that integrates a math formula keyboard with advanced visual input control. Users can enter mathematical expressions, see live LaTeX-rendered output, and interact with the app using either voice commands or eye control (through AR face tracking).
 
 ## Overview
 
-MathVisionPro combines these major components:
+Mathion combines these major components:
 - **Math Keyboard:** A digital keypad that lets you construct complex mathematical formulas with buttons for numbers, operators, and common LaTeX commands. The input is rendered using KaTeX.
 - **Visual Input:** Leverages both voice recognition and ARKit-based eye control to simulate touch interactions within the app.
 - **Configurable AR Settings:** Customize AR face tracking options such as light estimation and world alignment to enhance eye control accuracy.
@@ -34,7 +34,7 @@ MathVisionPro combines these major components:
 
 ## VisionOS Support
 
-Some AR features of MathVisionPro are available on visionOS. Note that visionOS introduces new frameworks:
+Some AR features of Mathion are available on visionOS. Note that visionOS introduces new frameworks:
 - Instead of using ARKit exclusively, visionOS leverages RealityKit and RealityKit for VisionOS.
 - When building for visionOS, ensure your code conditionally imports and uses the appropriate APIs.
 - The VisualInputManager employs compile flags (e.g. `#if os(visionOS)`) to switch to RealityKit-related functionality as needed.
@@ -44,7 +44,7 @@ Please refer to the platform-specific documentation for RealityKit for VisionOS 
 
 ## Architecture
 
-- **MathVisionProApp.swift**  
+- **MathionApp.swift**  
   Entry point for the SwiftUI app.
 
 - **ContentView.swift**  
@@ -75,7 +75,7 @@ Please refer to the platform-specific documentation for RealityKit for VisionOS 
 ## Setup and Installation
 
 1. **Clone or open** the project in Xcode.
-2. **Build and run** the `MathVisionProApp` target.
+2. **Build and run** the `MathionApp` target.
 3. **Enable Visual Input:**  
    - Navigate to the Options page via the app toolbar.  
    - Toggle visual input and select your desired control mode (voice or eye).
@@ -108,10 +108,6 @@ Please refer to the platform-specific documentation for RealityKit for VisionOS 
 - Expansion of voice commands for broader functionality.
 - Further UI enhancements for even smoother user experience.
 - Integration of user feedback for continuous improvement.
-
-## Credits
-
-Developed by 沈梓僮. Thank you for trying MathVisionPro!
 
 ## License
 
