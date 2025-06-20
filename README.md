@@ -108,7 +108,3 @@ Please refer to the platform-specific documentation for RealityKit for VisionOS 
 - Expansion of voice commands for broader functionality.
 - Further UI enhancements for even smoother user experience.
 - Integration of user feedback for continuous improvement.
-
-## License
-
-Distributed under the MIT License. See the `LICENSE` file for more details.
