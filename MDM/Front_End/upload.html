@@ -1,0 +1,517 @@
+<!DOCTYPE html>
+<html lang="">
+<head>
+  <meta charset="utf-8">
+  <meta name="renderer" content="webkit">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=0">
+  <title>Upload Templates | MATHION</title>
+  <link rel="stylesheet" href="./css/lib/bootstrap.min.css">
+    <link rel="stylesheet" href="./layer/theme/default/layer.css">
+    <link rel="stylesheet" type="text/css" href="./css/reponse.css">
+    <link rel="stylesheet" type="text/css" href="./css/custom.css">
+    <link rel="stylesheet" type="text/css" href="./css/common.css">
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
+  <style>
+    /* 全局基础样式 */
+    body {
+        margin: 0;
+        padding: 0;
+        font-family: 'Roboto', sans-serif;
+        position: relative;
+        min-height: 100vh;
+        background-color: #f5f7fa;
+        color: #333;
+    }
+    /* 页头 */
+    #header {
+        background-color: #fff;
+        padding: 15px 20px;
+        border-bottom: 1px solid #eee;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        position: relative;
+        box-shadow: 0 2px 10px rgba(0, 0, 0, 0.05);
+    }
+    #header h1 {
+        margin: 0;
+        font-size: 22px;
+        text-align: center;
+        color: #3a3a3a;
+        font-weight: 500;
+    }
+    /* 返回按钮：绝对定位到页头左侧 */
+    .btn-back {
+        position: absolute;
+        left: 20px;
+        top: 50%;
+        transform: translateY(-50%);
+        display: flex;
+        align-items: center;
+        padding: 8px 12px;
+        border-radius: 6px;
+        background-color: #f0f5ff;
+        color: #4a89dc;
+        border: none;
+        cursor: pointer;
+        font-weight: 500;
+        transition: all 0.3s;
+    }
+    .btn-back:hover {
+        background-color: #e0ecff;
+        box-shadow: 0 2px 8px rgba(74, 137, 220, 0.15);
+    }
+    .btn-back::before {
+        content: '\f060';
+        font-family: 'Font Awesome 5 Free';
+        font-weight: 900;
+        margin-right: 8px;
+    }
+    /* 用户信息区域：绝对定位到页头右侧 */
+    #user-menu {
+        position: absolute;
+        right: 20px;
+        top: 50%;
+        transform: translateY(-50%);
+        cursor: pointer;
+        display: flex;
+        align-items: center;
+        padding: 8px 12px;
+        border-radius: 20px;
+        transition: all 0.3s;
+    }
+    #user-menu:hover {
+        background-color: #f0f5ff;
+    }
+    #user-menu::before {
+        content: '\f007';
+        font-family: 'Font Awesome 5 Free';
+        font-weight: 900;
+        margin-right: 8px;
+        color: #4a89dc;
+    }
+    #user-menu span {
+        font-weight: 500;
+        color: #4a5568;
+    }
+    /* 内容区域 */
+    #content {
+        padding: 30px;
+        padding-bottom: 80px; /* 避免与底部重叠 */
+    }
+    /* 表格样式优化 */
+    table#table, table#table th, table#table td {
+        text-align: center;
+        border: none;
+    }
+    .reponsetable {
+        border-radius: 8px;
+        overflow: hidden;
+        box-shadow: 0 4px 12px rgba(0,0,0,0.05);
+        margin-bottom: 30px;
+    }
+    .reponsetable thead tr {
+        background-color: #4a89dc;
+        color: white;
+    }
+    .reponsetable thead th {
+        padding: 15px !important;
+        font-weight: 500;
+        border: none !important;
+    }
+    .reponsetable tbody tr {
+        background-color: white;
+        transition: all 0.2s;
+    }
+    .reponsetable tbody tr:hover {
+        background-color: #f0f5ff;
+    }
+    .reponsetable tbody td {
+        padding: 15px !important;
+        border-bottom: 1px solid #eee !important;
+        color: #4a5568;
+    }
+    .btn-standard {
+        padding: 10px 16px;
+        border: none;
+        border-radius: 6px;
+        color: #fff;
+        font-size: 14px;
+        cursor: pointer;
+        font-weight: 500;
+        transition: all 0.3s;
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        min-width: 120px;
+        background-color: #4a89dc;
+    }
+    .btn-standard:hover {
+        transform: translateY(-2px);
+        box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+    }
+    .btn-danger {
+        background-color: #e74c3c;
+    }
+    .btn-danger:hover {
+        background-color: #c0392b;
+    }
+    .btn-success {
+        background-color: #2ecc71;
+    }
+    .btn-success:hover {
+        background-color: #27ae60;
+    }
+    /* 按钮内图标 */
+    .btn-standard i {
+        margin-right: 5px;
+    }
+    /* 底部 */
+    #footer {
+        position: fixed;
+        bottom: 0;
+        left: 0;
+        width: 100%;
+        background-color: #fff;
+        text-align: center;
+        padding: 15px 0;
+        border-top: 1px solid #eee;
+        font-size: 14px;
+        color: #777;
+        box-shadow: 0 -2px 10px rgba(0, 0, 0, 0.05);
+    }
+    /* 卡片容器样式 */
+    .card-container {
+        background-color: white;
+        border-radius: 8px;
+        box-shadow: 0 4px 12px rgba(0,0,0,0.05);
+        padding: 25px;
+        margin-bottom: 25px;
+    }
+    /* 无数据提示 */
+    #noDataMessage {
+        text-align: center;
+        padding: 50px 0;
+        font-size: 18px;
+        color: #7f8c8d;
+    }
+    #noDataMessage i {
+        font-size: 50px;
+        margin-bottom: 15px;
+        color: #dfe6e9;
+    }
+    /* 顶部操作区 */
+    .top-actions {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        margin-bottom: 20px;
+    }
+    /* 弹窗表单样式 */
+    .popup-form {
+        padding: 20px;
+    }
+    
+    .popup-form .form-group {
+        margin-bottom: 20px;
+    }
+    
+    .popup-form label {
+        display: block;
+        margin-bottom: 8px;
+        font-weight: 500;
+        color: #4a5568;
+    }
+    
+    .popup-form input {
+        width: 100%;
+        padding: 10px 15px;
+        border: 1px solid #ddd;
+        border-radius: 6px;
+        font-size: 15px;
+        transition: all 0.3s;
+        background-color: #f8f9fa;
+    }
+    
+    .popup-form input:focus {
+        border-color: #4a89dc;
+        box-shadow: 0 0 0 3px rgba(74, 137, 220, 0.1);
+        outline: none;
+        background-color: #fff;
+    }
+    
+    .popup-btn-container {
+        display: flex;
+        justify-content: flex-end;
+        gap: 10px;
+        margin-top: 20px;
+    }
+    
+    .popup-btn-container button {
+        padding: 8px 16px;
+        border: none;
+        border-radius: 4px;
+        font-weight: 500;
+        cursor: pointer;
+        transition: all 0.3s;
+    }
+    
+    .popup-btn-container .cancel-btn {
+        background-color: #e0e0e0;
+        color: #4a5568;
+    }
+    
+    .popup-btn-container .save-btn {
+        background-color: #4a89dc;
+        color: white;
+    }
+    
+    .popup-btn-container button:hover {
+        transform: translateY(-2px);
+        box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+    }
+    /* 用户信息区域：绝对定位到页头右侧 */
+    #user-menu {
+        position: absolute;
+        right: 20px;
+        top: 50%;
+        transform: translateY(-50%);
+        cursor: pointer;
+        display: flex;
+        align-items: center;
+        padding: 8px 12px;
+        border-radius: 20px;
+        transition: all 0.3s;
+    }
+    #user-menu:hover {
+        background-color: #f0f5ff;
+    }
+    #user-menu::before {
+        content: '\f007';
+        font-family: 'Font Awesome 5 Free';
+        font-weight: 900;
+        margin-right: 8px;
+        color: #4a89dc;
+    }
+    #user-menu span {
+        font-weight: 500;
+        color: #4a5568;
+    }
+    /* 下拉菜单 */
+    #dropdown {
+        display: none;
+        position: absolute;
+        right: 0;
+        top: 100%;
+        background-color: #fff;
+        border-radius: 8px;
+        border: none;
+        box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+        width: 150px;
+        z-index: 100;
+        overflow: hidden;
+        margin-top: 8px;
+    }
+    #dropdown a {
+        display: flex;
+        padding: 12px 16px;
+        text-decoration: none;
+        color: #4a5568;
+        transition: all 0.2s;
+        align-items: center;
+    }
+    #dropdown a:hover {
+        background-color: #f0f5ff;
+        color: #4a89dc;
+    }
+    #dropdown a::before {
+        font-family: 'Font Awesome 5 Free';
+        font-weight: 900;
+        margin-right: 8px;
+    }
+    #personalInfo::before {
+        content: '\f007';
+    }
+    #logout::before {
+        content: '\f2f5';
+    }
+    
+    /* 响应式调整 */
+    @media (max-width: 768px) {
+        .top-actions {
+            flex-direction: column;
+            gap: 15px;
+            align-items: flex-start;
+        }
+        
+        .btn-standard {
+            width: 100%;
+        }
+    }
+</style>
+</head>
+<body>
+<div id="header">
+  <button class="btn btn-secondary btn-back" onclick="window.history.back();"></button>
+  <h1>Apple Vision Pro Management System</h1>
+  <div id="user-menu">
+    <span id="username"></span>
+    <div id="dropdown">
+        <a href="#" id="personalInfo">Personal Info</a>
+        <a href="#" id="logout">Logout</a>
+    </div>
+</div>
+</div>
+<div class="content-container">
+  <div class="container mt-5">
+    <div class="row">
+      <div class="col-md-8 offset-md-2">
+        <h2 class="text-center mb-4">Upload Template Files</h2>
+        <form id="input_form" onsubmit="return submitInfo();">
+          <div class="form-group mb-3">
+            <label for="input_name">Template Name</label>
+            <input type="text" class="form-control" id="input_name" placeholder="Enter template name" required />
+            <small id="nameWarn" class="form-warning"></small>
+          </div>
+          <div class="form-group mb-3">
+            <label for="input_subject">Template Subject</label>
+            <input type="text" class="form-control" id="input_subject" placeholder="Enter template subject" required />
+            <small id="subjectWarn" class="form-warning"></small>
+          </div>
+          <div class="form-group mb-3">
+            <label for="input_question_file">Upload Question File</label>
+            <input type="file" class="form-control-file" id="input_question_file" name="question_file" />
+          </div>
+          <div class="form-group mb-3">
+            <label for="input_answer_file">Upload Answer File (Optional)</label>
+            <input type="file" class="form-control-file" id="input_answer_file" name="answer_file" />
+          </div>
+          <button type="submit" class="btn-standard w-100">Upload</button>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>
+<div id="footer">
+  <div>Version 1.0 | Contact Us: (852) 53137630</div>
+  <div>©Copyright Ready Player One</div>
+</div>
+
+<!-- JavaScript -->
+<script src="./js/config.js?v=2"></script>
+<script src="./js/jquery.min.js?v=2"></script>
+<script src="./layer/layer.js?v=2"></script>
+<script src="./js/common.js?v=2"></script>
+<script type="text/javascript">
+  const teacherName = sessionStorage.getItem("user_name");
+        $("#username").text(teacherName);
+    // 用户菜单相关事件
+    $("#user-menu").click(function(e){
+            $("#dropdown").toggle();
+            e.stopPropagation();
+    });
+    $(document).click(function(){
+        $("#dropdown").hide();
+    });
+    
+    $("#personalInfo").click(function(e){
+        e.preventDefault();
+        window.location.href = "personal.html";
+    });
+    
+    $("#logout").click(function(e){
+        e.preventDefault(); 
+        sendAjaxRequest("/user/logout", "DELETE", {}, 
+            function() {
+                window.location.href = "homepage.html";
+            },
+            function(error) {
+                console.error("Logout error:", error);
+                showErrorMessage("Logout failed. Please try again.");
+            }
+        );
+    });
+  // Check Template Name: must not be empty and length <= 32 characters
+  function checkName() {
+    var name = $("#input_name").val().trim();
+    if (name === "") {
+      $("#nameWarn").html("Name cannot be empty!");
+      return false;
+    }
+    if (name.length > 32) {
+      $("#nameWarn").html("Name must be at most 32 characters!");
+      return false;
+    }
+    $("#nameWarn").html("");
+    return true;
+  }
+
+  // Check Template Subject: must not be empty and length <= 32 characters
+  function checkSubject(){
+    var subject = $("#input_subject").val().trim();
+    if (subject === "") {
+      $("#subjectWarn").html("Subject cannot be empty!");
+      return false;
+    }
+    if (subject.length > 32) {
+      $("#subjectWarn").html("Subject must be at most 32 characters!");
+      return false;
+    }
+    $("#subjectWarn").html("");
+    return true;
+  }
+
+  // Submit form: use FormData to upload file and other data asynchronously
+  function submitInfo(){
+    if (!checkName() || !checkSubject()){
+      return false;
+    }
+    var formData = new FormData();
+    formData.append("name", $("#input_name").val().trim());
+    formData.append("subject", $("#input_subject").val().trim());
+
+    var questionFileField = document.getElementById("input_question_file");
+    var answerFileField = document.getElementById("input_answer_file");
+    
+    if(questionFileField.files.length === 0 && answerFileField.files.length === 0){
+      showErrorMessage("Please select at least one file to upload.");
+      return false;
+    }
+    
+    if(questionFileField.files.length > 0) {
+      formData.append("question_file", questionFileField.files[0]);
+    }
+    
+    if(answerFileField.files.length > 0) {
+      formData.append("answer_file", answerFileField.files[0]);
+    }
+    
+    // Get template ID from URL
+    var id = getQueryParam("id");
+    var templateId = id || 1; // Default to 1 if no id parameter
+
+    $.ajax({
+      url: "/api/template/" + templateId + "/file/upload",
+      type: "POST",
+      data: formData,
+      processData: false, // Do not process data
+      contentType: false, // Do not set Content-Type, browser will generate multipart/form-data
+      success: function(response){
+        if (response.code === 200) {
+          showSuccessMessage("Upload successful: " + response.message);
+          $("#input_form")[0].reset();
+        } else {
+          showErrorMessage("Upload failed: " + response.message);
+        }
+      },
+      error: function(xhr){
+        showErrorMessage("Upload failed: " + xhr.responseText);
+      }
+    });
+    return false;
+  }
+</script>
+</body>
+</html>

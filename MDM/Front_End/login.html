@@ -1,0 +1,275 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Login | MATHION</title>
+  <link rel="stylesheet" href="./css/lib/bootstrap.min.css">
+  <link rel="stylesheet" href="./css/common.css">
+  <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700&display=swap" rel="stylesheet">
+  <style>
+    /* Reset default styles */
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+    html, body {
+      padding: 0;
+      height: 100%;
+      font-family: 'Roboto', sans-serif;
+      background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
+    }
+    /* Center container */
+    .container {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+      padding: 0 15px;
+    }
+    /* Login form styling */
+    .login-form {
+      background-color: #fff;
+      padding: 40px;
+      border-radius: 12px;
+      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+      width: 100%;
+      max-width: 450px;
+      transition: all 0.3s ease;
+    }
+    .login-form:hover {
+      box-shadow: 0 15px 40px rgba(0, 0, 0, 0.15);
+    }
+    .login-form h2 {
+      text-align: center;
+      color: #3a3a3a;
+      margin-bottom: 30px;
+      font-weight: 600;
+      font-size: 28px;
+    }
+    .form-group {
+      margin-bottom: 25px;
+      position: relative;
+    }
+    .form-group label {
+      display: block;
+      margin-bottom: 8px;
+      color: #555;
+      font-weight: 500;
+      font-size: 16px;
+    }
+    .form-group input {
+      width: 100%;
+      padding: 12px 15px;
+      font-size: 16px;
+      border: 1px solid #ddd;
+      border-radius: 6px;
+      transition: all 0.3s;
+    }
+    .form-group input:focus {
+      border-color: #4a89dc;
+      box-shadow: 0 0 0 3px rgba(74, 137, 220, 0.1);
+      outline: none;
+    }
+    .btn-standard {
+      width: 100%;
+      padding: 14px;
+      background-color: #4a89dc;
+      border: none;
+      border-radius: 6px;
+      color: #fff;
+      font-size: 16px;
+      cursor: pointer;
+      font-weight: 500;
+      transition: background-color 0.3s;
+    }
+    .btn-standard:hover {
+      background-color: #3b7ad1;
+    }
+    /* Forgot password link style */
+    .forgot-password {
+      display: block;
+      text-align: right;
+      font-size: 14px;
+      color: #4a89dc;
+      text-decoration: none;
+      margin-bottom: 20px;
+      transition: color 0.3s;
+    }
+    .forgot-password:hover {
+      color: #3b7ad1;
+      text-decoration: underline;
+    }
+    .error-message {
+      color: #e74c3c;
+      text-align: center;
+      margin-bottom: 20px;
+      padding: 10px;
+      background-color: rgba(231, 76, 60, 0.1);
+      border-radius: 6px;
+      display: none;
+    }
+    #header {
+      background-color: rgba(255, 255, 255, 0.9);
+      padding: 15px 20px;
+      border-bottom: 1px solid #eee;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      position: relative;
+      box-shadow: 0 2px 10px rgba(0, 0, 0, 0.05);
+    }
+    #header h1 {
+      margin: 0;
+      font-size: 22px;
+      text-align: center;
+      color: #3a3a3a;
+      font-weight: 500;
+    }
+    #footer {
+      position: fixed;
+      bottom: 0;
+      left: 0;
+      width: 100%;
+      background-color: rgba(255, 255, 255, 0.9);
+      text-align: center;
+      padding: 15px 0;
+      border-top: 1px solid #eee;
+      font-size: 14px;
+      color: #777;
+    }
+    
+    /* Logo/icon for login form */
+    .login-logo {
+      text-align: center;
+      margin-bottom: 30px;
+    }
+    .login-logo img {
+      width: 80px;
+      height: auto;
+    }
+    
+    /* Animation for form elements */
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translateY(20px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+    
+    .login-form h2,
+    .login-form .form-group {
+      animation: fadeIn 0.6s ease forwards;
+    }
+    
+    .login-form .form-group:nth-child(2) {
+      animation-delay: 0.1s;
+    }
+    
+    .login-form .form-group:nth-child(3) {
+      animation-delay: 0.2s;
+    }
+    
+    .forgot-password {
+      animation: fadeIn 0.6s 0.3s ease forwards;
+      opacity: 0;
+    }
+    
+    .form-group:last-child {
+      animation-delay: 0.4s;
+    }
+  </style>
+</head>
+<body>
+<div id="header">
+  <h1>Apple Vision Pro Management System</h1>
+</div>
+<div class="container">
+  <div class="login-form">
+    <!-- <div class="login-logo">
+      <img src="./img/logo.png" alt="Logo" onerror="this.src='https://via.placeholder.com/80?text=MDM';this.onerror='';">
+    </div> -->
+    <h2>Welcome Back</h2>
+    <div id="error-msg" class="error-message">Username or password cannot be empty</div>
+    <form id="loginForm" method="post" action="javascript:void(0);">
+      <div class="form-group">
+        <label for="account">Account</label>
+        <input type="text" id="account" name="account" placeholder="Please enter your account" autocomplete="username" />
+      </div>
+      <div class="form-group">
+        <label for="password">Password</label>
+        <input type="password" id="password" name="password" placeholder="Please enter your password" autocomplete="current-password" />
+      </div>
+      <a href="#" class="forgot-password" id="forgotPassword">Forgot Password?</a>
+      <div class="form-group">
+        <button type="submit" class="btn-standard">Login</button>
+      </div>
+    </form>
+  </div>
+</div>
+<div id="footer">
+  <div>Version 1.0 | Contact Us: (852) 53137630</div>
+  <div>©Copyright Ready Player One</div>
+</div>
+
+<script src="./js/jquery.min.js"></script>
+<script src="./js/config.js?v=1.0.6"></script>
+<script src="./js/common.js?"></script>
+<script>
+  // Remove any existing parameters from URL to prevent credential leakage
+  if (window.location.search) {
+    var cleanUrl = window.location.protocol + "//" + window.location.host + window.location.pathname;
+    window.history.replaceState({}, document.title, cleanUrl);
+  }
+
+  // Ensure DOM is loaded before binding events
+  $(document).ready(function() {
+    var errorMsg = $('#error-msg');
+
+    // "Forgot Password?" link click event
+    $('#forgotPassword').click(function(event) {
+      event.preventDefault();
+      errorMsg.text("Please verify your email or contact the administrator to reset your password.");
+      errorMsg.show();
+    });
+
+    // Login form submit event, send AJAX request for authentication
+    $('#loginForm').submit(function(event) {
+      event.preventDefault();
+
+      var account = $('#account').val().trim();
+      var password = $('#password').val().trim();
+
+      if (account === '' || password === '') {
+        errorMsg.text("Account or password cannot be empty");
+        errorMsg.show();
+        return;
+      } else {
+        errorMsg.hide();
+      }
+
+      // Send POST request to validate account and password
+      sendAjaxRequest('/teacher/login', 'POST', 
+        { account: account, password: password },
+        function(data) {
+          if (data.code === 200) {
+            sessionStorage.setItem("user_id", data.id);
+            sessionStorage.setItem("user_name", data.name);
+            window.location.href = "information.html";
+          } else {
+            errorMsg.text("Incorrect account or password");
+            errorMsg.show();
+            $('#account').val("");
+            $('#password').val("");
+          }
+        },
+        function(error) {
+          console.error("Error during login:", error);
+          errorMsg.text("An error occurred. Please try again later.");
+          errorMsg.show();
+        }
+      );
+    });
+  });
+</script>
+</body>
+</html>

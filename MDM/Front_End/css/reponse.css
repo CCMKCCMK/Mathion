@@ -1,0 +1,67 @@
+/* Response table styles */
+.reponsetable {
+    width: 100%;
+    margin-bottom: 1rem;
+    background-color: transparent;
+    border-collapse: collapse;
+}
+
+.reponsetable th,
+.reponsetable td {
+    padding: 0.75rem;
+    vertical-align: middle;
+    border-top: 1px solid #dee2e6;
+}
+
+.reponsetable thead th {
+    vertical-align: bottom;
+    border-bottom: 2px solid #dee2e6;
+    background-color: #4a89dc;
+    color: white;
+}
+
+.reponsetable tbody tr:nth-of-type(odd) {
+    background-color: rgba(0, 0, 0, 0.05);
+}
+
+.reponsetable tbody tr:hover {
+    background-color: rgba(0, 0, 0, 0.075);
+}
+
+/* Responsive breakpoints */
+@media screen and (max-width: 768px) {
+    .reponsetable-responsive {
+        display: block;
+        width: 100%;
+        overflow-x: auto;
+        -webkit-overflow-scrolling: touch;
+    }
+    
+    .reponsetable-responsive thead {
+        display: none;
+    }
+    
+    .reponsetable-responsive tbody tr {
+        display: block;
+        margin-bottom: 1rem;
+        border: 1px solid #dee2e6;
+    }
+    
+    .reponsetable-responsive td {
+        display: block;
+        text-align: right;
+        border: none;
+        position: relative;
+        padding-left: 50%;
+    }
+    
+    .reponsetable-responsive td::before {
+        content: attr(data-label);
+        position: absolute;
+        left: 0;
+        width: 45%;
+        padding-left: 15px;
+        font-weight: bold;
+        text-align: left;
+    }
+} 

@@ -1,0 +1,559 @@
+<!DOCTYPE html>
+<html lang="">
+<head>
+  <meta charset="utf-8">
+  <meta name="renderer" content="webkit">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=0">
+  <title>Add Student to Class | MATHION</title>
+  <link rel="stylesheet" href="./css/lib/bootstrap.min.css">
+  <link rel="stylesheet" href="./layer/theme/default/layer.css">
+  <link rel="stylesheet" type="text/css" href="./css/reponse.css">
+  <link rel="stylesheet" type="text/css" href="./css/custom.css">
+  <link rel="stylesheet" type="text/css" href="./css/common.css">
+  <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
+  <style>
+    /* 全局基础样式 */
+    body {
+      margin: 0;
+      padding: 0;
+      font-family: 'Roboto', sans-serif;
+      position: relative;
+      min-height: 100vh;
+      background-color: #f5f7fa;
+      color: #333;
+    }
+    
+    /* 页头 */
+    #header {
+      background-color: #fff;
+      padding: 15px 20px;
+      border-bottom: 1px solid #eee;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      position: relative;
+      box-shadow: 0 2px 10px rgba(0, 0, 0, 0.05);
+    }
+    #header h1 {
+      margin: 0;
+      font-size: 22px;
+      text-align: center;
+      color: #3a3a3a;
+      font-weight: 500;
+    }
+    /* 用户信息区域 */
+    #user-menu {
+      position: absolute;
+      right: 20px;
+      top: 50%;
+      transform: translateY(-50%);
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      padding: 8px 12px;
+      border-radius: 20px;
+      transition: all 0.3s;
+    }
+    #user-menu:hover {
+      background-color: #f0f5ff;
+    }
+    #user-menu::before {
+      content: '\f007';
+      font-family: 'Font Awesome 5 Free';
+      font-weight: 900;
+      margin-right: 8px;
+      color: #4a89dc;
+    }
+    #user-menu span {
+      font-weight: 500;
+      color: #4a5568;
+    }
+    /* 下拉菜单 */
+    #dropdown {
+      display: none;
+      position: absolute;
+      right: 0;
+      top: 100%;
+      background-color: #fff;
+      border-radius: 8px;
+      border: none;
+      box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+      width: 150px;
+      z-index: 100;
+      overflow: hidden;
+      margin-top: 8px;
+    }
+    #dropdown a {
+      display: flex;
+      padding: 12px 16px;
+      text-decoration: none;
+      color: #4a5568;
+      transition: all 0.2s;
+      align-items: center;
+    }
+    #dropdown a:hover {
+      background-color: #f0f5ff;
+      color: #4a89dc;
+    }
+    #dropdown a::before {
+      font-family: 'Font Awesome 5 Free';
+      font-weight: 900;
+      margin-right: 8px;
+    }
+    #personalInfo::before {
+      content: '\f007';
+    }
+    #logout::before {
+      content: '\f2f5';
+    }
+    
+    /* 内容区域 */
+    .content-container {
+      padding: 30px;
+      padding-bottom: 80px;
+    }
+    
+    /* 卡片容器样式 */
+    .card-container {
+      background-color: white;
+      border-radius: 8px;
+      box-shadow: 0 4px 12px rgba(0,0,0,0.05);
+      padding: 25px;
+      margin-bottom: 25px;
+    }
+    
+    h1 {
+      font-size: 24px;
+      margin-bottom: 20px;
+      color: #3a3a3a;
+      font-weight: 500;
+    }
+    
+    legend {
+      font-size: 18px;
+      font-weight: 500;
+      margin-bottom: 20px;
+      color: #4a89dc;
+      border-bottom: 1px solid #eee;
+      padding-bottom: 10px;
+      width: 100%;
+    }
+    
+    .form-group {
+      margin-bottom: 20px;
+    }
+    
+    .control-label {
+      display: block;
+      margin-bottom: 8px;
+      font-weight: 500;
+      color: #4a5568;
+    }
+    
+    .controls input, .controls select {
+      width: 100%;
+      padding: 10px 15px;
+      border: 1px solid #ddd;
+      border-radius: 6px;
+      font-size: 14px;
+      transition: all 0.3s;
+      background-color: #f8f9fa;
+    }
+    
+    .controls input:focus, .controls select:focus {
+      border-color: #4a89dc;
+      box-shadow: 0 0 0 3px rgba(74, 137, 220, 0.1);
+      outline: none;
+      background-color: #fff;
+    }
+    
+    .form-warning {
+      color: #e74c3c;
+      font-size: 12px;
+      margin-top: 5px;
+      display: block;
+    }
+    
+    .btn-container {
+      display: flex;
+      justify-content: center;
+      margin-top: 25px;
+      gap: 15px;
+    }
+    
+    .btn-standard {
+      padding: 10px 20px;
+      border: none;
+      border-radius: 6px;
+      color: #fff;
+      font-size: 14px;
+      cursor: pointer;
+      font-weight: 500;
+      transition: all 0.3s;
+      background-color: #4a89dc;
+      min-width: 120px;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+    }
+    
+    .btn-standard:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+    }
+    
+    .btn-cancel {
+      background-color: #95a5a6;
+    }
+    
+    .btn-cancel:hover {
+      background-color: #7f8c8d;
+    }
+    
+    /* 按钮内图标 */
+    .btn-standard i {
+      margin-right: 5px;
+    }
+    
+    /* 学生卡片样式 */
+    .student-card {
+      background-color: #f0f5ff;
+      border-radius: 8px;
+      padding: 15px;
+      margin-top: 20px;
+      border: 1px solid #d1e1ff;
+      display: none;
+    }
+    
+    .student-card h3 {
+      margin: 0 0 10px 0;
+      font-size: 16px;
+      color: #4a89dc;
+    }
+    
+    .student-info {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+    }
+    
+    .student-info-item {
+      background-color: white;
+      border-radius: 4px;
+      padding: 8px 12px;
+      flex: 1 1 calc(50% - 10px);
+      min-width: 120px;
+    }
+    
+    .student-info-item span {
+      display: block;
+    }
+    
+    .info-label {
+      font-size: 12px;
+      color: #718096;
+    }
+    
+    .info-value {
+      font-size: 14px;
+      font-weight: 500;
+      color: #2d3748;
+      margin-top: 4px;
+    }
+    
+    /* 页脚 */
+    #footer {
+      position: fixed;
+      bottom: 0;
+      left: 0;
+      width: 100%;
+      background-color: #fff;
+      text-align: center;
+      padding: 15px 0;
+      border-top: 1px solid #eee;
+      font-size: 14px;
+      color: #777;
+      box-shadow: 0 -2px 10px rgba(0, 0, 0, 0.05);
+    }
+  </style>
+</head>
+<body>
+<!-- 页头 -->
+<div id="header">
+    <h1>Add Student to Class</h1>
+    <div id="user-menu">
+        <span id="username">User</span>
+        <div id="dropdown">
+            <a href="#" id="personalInfo">Personal Info</a>
+            <a href="#" id="logout">Logout</a>
+        </div>
+    </div>
+</div>
+
+<!-- 主体内容区域 -->
+<div class="content-container">
+  <div class="card-container">
+    <div class="btn-container" style="margin-bottom: 20px;">
+      <button class="btn-standard btn-cancel" type="button" onclick="backToClassPage();"><i class="fas fa-arrow-left"></i> Back</button>
+      <button class="btn-standard" type="button" onclick="submitForm();"><i class="fas fa-check"></i> Add to Class</button>
+    </div>
+    <form class="form-horizontal" id="input_form" onsubmit="return false;">
+      <fieldset>
+        <legend>Add an existing student to this class</legend>
+        <!-- 搜索方式选择 -->
+        <div class="form-group">
+          <label class="control-label">Search Method</label>
+          <div class="controls">
+            <label class="radio inline" for="search_by_id">
+              <input type="radio" name="search_method" id="search_by_id" value="id" checked="checked"> By Student ID
+            </label>
+            <label class="radio inline" for="search_by_account">
+              <input type="radio" name="search_method" id="search_by_account" value="account"> By Account
+            </label>
+            <label class="radio inline" for="search_by_name">
+              <input type="radio" name="search_method" id="search_by_name" value="name"> By Name
+            </label>
+          </div>
+        </div>
+        
+        <!-- 搜索关键词 -->
+        <div class="form-group">
+          <label class="control-label" for="search_term">Search Student</label>
+          <div class="controls">
+            <div style="display: flex; gap: 10px;">
+              <input id="search_term" name="search_term" type="text" class="input-xlarge" placeholder="Enter student ID, account or name">
+              <button type="button" class="btn-standard" onclick="searchStudent()"><i class="fas fa-search"></i> Search</button>
+            </div>
+            <label id="searchWarn" class="form-warning"></label>
+          </div>
+        </div>
+        
+        <!-- 学生信息卡片 - 搜索结果显示 -->
+        <div id="student_card" class="student-card">
+          <h3>Student Information</h3>
+          <div class="student-info">
+            <div class="student-info-item">
+              <span class="info-label">Student ID</span>
+              <span class="info-value" id="student_id">-</span>
+            </div>
+            <div class="student-info-item">
+              <span class="info-label">Name</span>
+              <span class="info-value" id="student_name">-</span>
+            </div>
+            <div class="student-info-item">
+              <span class="info-label">Account</span>
+              <span class="info-value" id="student_account">-</span>
+            </div>
+            <div class="student-info-item">
+              <span class="info-label">Status</span>
+              <span class="info-value" id="student_status">-</span>
+            </div>
+          </div>
+        </div>
+      </fieldset>
+    </form>
+  </div>
+</div>
+
+<!-- 页脚 -->
+<div id="footer">
+    <div>Version 1.0 | Contact Us: (852) 53137630</div>
+    <div>©Copyright Ready Player One</div>
+</div>
+
+<!-- JavaScript -->
+<script src="./js/jquery.min.js"></script>
+<script src="./layer/layer.js"></script>
+<script src="./js/config.js"></script>
+<script src="./js/common.js"></script>
+<script type="text/javascript">
+  // 存储找到的学生ID
+  var foundStudentId = null;
+  var classId = null;
+  
+  $(function() {
+    // 获取URL中的班级ID
+    classId = getParameterByName('class_id');
+    if (!classId) {
+      showErrorMessage("No class ID provided!");
+      setTimeout(function() {
+        backToClassPage();
+      }, 2000);
+    }
+    
+    // 从sessionStorage获取教师姓名
+    var teacherName = sessionStorage.getItem("teacherName");
+    if (teacherName) {
+      $("#username").text(teacherName);
+    }
+    
+    // 用户菜单相关事件
+    $("#user-menu").click(function(e){
+      $("#dropdown").toggle();
+      e.stopPropagation();
+    });
+    $(document).click(function(){
+      $("#dropdown").hide();
+    });
+    
+    $("#personalInfo").click(function(e){
+      e.preventDefault();
+      window.location.href = "personal.html";
+    });
+    
+    $("#logout").click(function(e){
+      e.preventDefault();
+      sendAjaxRequest("/user/logout", "DELETE", {}, 
+        function() {
+          sessionStorage.clear();
+          window.location.href = "login.html";
+        },
+        function(error) {
+          console.error("Logout error:", error);
+          showErrorMessage("Logout failed. Please try again.");
+        }
+      );
+    });
+  });
+  
+  // 获取URL参数
+  function getParameterByName(name) {
+    var url = window.location.href;
+    name = name.replace(/[\[\]]/g, '\\$&');
+    var regex = new RegExp('[?&]' + name + '(=([^&#]*)|&|#|$)'),
+        results = regex.exec(url);
+    if (!results) return null;
+    if (!results[2]) return '';
+    return decodeURIComponent(results[2].replace(/\+/g, ' '));
+  }
+  
+  // 搜索学生
+  function searchStudent() {
+    var searchMethod = $('input[name="search_method"]:checked').val();
+    var searchTerm = $("#search_term").val().trim();
+    
+    if (searchTerm === "") {
+      $("#searchWarn").html("Please enter search term!");
+      return;
+    }
+    
+    $("#searchWarn").html("");
+    
+    // 显示加载中
+    var loadingIndex = layer.load(1, {
+      shade: [0.1, '#fff']
+    });
+    
+    // 这里应该调用后端API搜索学生
+    // 由于后端可能还没有专门的搜索API，我们模拟一个搜索过程
+    setTimeout(function() {
+      // 关闭加载中
+      layer.close(loadingIndex);
+      
+      // 模拟API调用
+      // 实际实现时，这里应该改为真实的API调用
+      // sendAjaxRequest("/api/student/search", "GET", {method: searchMethod, term: searchTerm}, function(response) { ... })
+      
+      // 这里模拟找到了学生
+      if (searchTerm.length >= 2) {
+        // 模拟找到学生数据
+        var mockStudentData = {
+          student_id: searchMethod === 'id' ? searchTerm : Math.floor(Math.random() * 100) + 1,
+          name: searchMethod === 'name' ? searchTerm : "Student " + Math.floor(Math.random() * 100),
+          account: searchMethod === 'account' ? searchTerm : "account" + Math.floor(Math.random() * 100),
+          status: "Active"
+        };
+        
+        // 显示学生信息
+        displayStudentInfo(mockStudentData);
+      } else {
+        $("#searchWarn").html("No student found with the given search term!");
+      }
+    }, 1000);
+  }
+  
+  // 显示学生信息
+  function displayStudentInfo(student) {
+    // 存储学生ID，用于后续添加操作
+    foundStudentId = student.student_id;
+    
+    // 填充学生信息到卡片
+    $("#student_id").text(student.student_id);
+    $("#student_name").text(student.name);
+    $("#student_account").text(student.account);
+    $("#student_status").text(student.status);
+    
+    // 显示学生卡片
+    $("#student_card").slideDown();
+  }
+  
+  // 关闭窗口
+  function closeWindow() {
+    // 由于不再使用弹窗，此函数改为返回班级页面
+    backToClassPage();
+  }
+  
+  // 返回班级页面
+  function backToClassPage() {
+    if (classId) {
+      window.location.href = "class_students.html?class_id=" + classId;
+    } else {
+      window.location.href = "information.html";
+    }
+  }
+  
+  // 提交表单，将学生添加到班级
+  function submitForm() {
+    if (!foundStudentId) {
+      showErrorMessage("Please search and select a student first!");
+      return false;
+    }
+    
+    if (!classId) {
+      showErrorMessage("Class ID not found!");
+      return false;
+    }
+    
+    // 准备API参数
+    var data = {
+      "classId": classId,
+      "studentId": foundStudentId
+    };
+    
+    sendAjaxRequest("/class/student/add", "POST", data, 
+      function(response) {
+        // 成功回调
+        if (response.code === 200) {
+          showSuccessMessage("Student added to class successfully!");
+          setTimeout(function() {
+            // 成功后返回班级页面
+            backToClassPage();
+          }, 1500);
+        } else {
+          showErrorMessage(response.message || "Failed to add student!");
+        }
+      },
+      function(error) {
+        // 失败回调
+        console.error("Error:", error);
+        showErrorMessage("Failed to add student. Please try again!");
+      }
+    );
+    
+    return false;
+  }
+  
+  // 显示成功消息
+  function showSuccessMessage(message) {
+    layer.msg(message, {icon: 1, time: 2000});
+  }
+  
+  // 显示错误消息
+  function showErrorMessage(message) {
+    layer.msg(message, {icon: 2, time: 2000});
+  }
+</script>
+</body>
+</html> 

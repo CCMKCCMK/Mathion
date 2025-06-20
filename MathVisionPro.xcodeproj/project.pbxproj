@@ -1,0 +1,510 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 60;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		3D23DA3B2D55155A00928993 /* VisualInputManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3D23DA3A2D55155A00928993 /* VisualInputManager.swift */; };
+		9C73EE6E2D51EDCB00365ED0 /* MathVisionProApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9C73EE6D2D51EDCB00365ED0 /* MathVisionProApp.swift */; };
+		9C73EE702D51EDCB00365ED0 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9C73EE6F2D51EDCB00365ED0 /* ContentView.swift */; };
+		9C73EE722D51EDCE00365ED0 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 9C73EE712D51EDCE00365ED0 /* Assets.xcassets */; };
+		9C73EE752D51EDCE00365ED0 /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 9C73EE742D51EDCE00365ED0 /* Preview Assets.xcassets */; };
+		9C73EE802D51EDCF00365ED0 /* MathVisionProTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9C73EE7F2D51EDCF00365ED0 /* MathVisionProTests.swift */; };
+		9C73EED22D52026900365ED0 /* MathKeyboardView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9C73EED12D52026900365ED0 /* MathKeyboardView.swift */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXContainerItemProxy section */
+		9C73EE7C2D51EDCF00365ED0 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 9C73EE5E2D51EDCB00365ED0 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 9C73EE652D51EDCB00365ED0;
+			remoteInfo = MathVisionPro;
+		};
+/* End PBXContainerItemProxy section */
+
+/* Begin PBXFileReference section */
+		3D23DA3A2D55155A00928993 /* VisualInputManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VisualInputManager.swift; sourceTree = "<group>"; };
+		9C73EE662D51EDCB00365ED0 /* MathVisionPro.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = MathVisionPro.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		9C73EE6A2D51EDCB00365ED0 /* RealityKitContent */ = {isa = PBXFileReference; lastKnownFileType = wrapper; path = RealityKitContent; sourceTree = "<group>"; };
+		9C73EE6D2D51EDCB00365ED0 /* MathVisionProApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MathVisionProApp.swift; sourceTree = "<group>"; };
+		9C73EE6F2D51EDCB00365ED0 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
+		9C73EE712D51EDCE00365ED0 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
+		9C73EE742D51EDCE00365ED0 /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
+		9C73EE762D51EDCE00365ED0 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		9C73EE7B2D51EDCF00365ED0 /* MathVisionProTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = MathVisionProTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		9C73EE7F2D51EDCF00365ED0 /* MathVisionProTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MathVisionProTests.swift; sourceTree = "<group>"; };
+		9C73EED12D52026900365ED0 /* MathKeyboardView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MathKeyboardView.swift; sourceTree = "<group>"; };
+/* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		9C73EE632D51EDCB00365ED0 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		9C73EE782D51EDCF00365ED0 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		9C73EE5D2D51EDCB00365ED0 = {
+			isa = PBXGroup;
+			children = (
+				9C73EE682D51EDCB00365ED0 /* MathVisionPro */,
+				9C73EE692D51EDCB00365ED0 /* Packages */,
+				9C73EE7E2D51EDCF00365ED0 /* MathVisionProTests */,
+				9C73EE672D51EDCB00365ED0 /* Products */,
+				9C73EED42D52046100365ED0 /* Frameworks */,
+			);
+			sourceTree = "<group>";
+		};
+		9C73EE672D51EDCB00365ED0 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				9C73EE662D51EDCB00365ED0 /* MathVisionPro.app */,
+				9C73EE7B2D51EDCF00365ED0 /* MathVisionProTests.xctest */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		9C73EE682D51EDCB00365ED0 /* MathVisionPro */ = {
+			isa = PBXGroup;
+			children = (
+				3D23DA3A2D55155A00928993 /* VisualInputManager.swift */,
+				9C73EED12D52026900365ED0 /* MathKeyboardView.swift */,
+				9C73EE6D2D51EDCB00365ED0 /* MathVisionProApp.swift */,
+				9C73EE6F2D51EDCB00365ED0 /* ContentView.swift */,
+				9C73EE712D51EDCE00365ED0 /* Assets.xcassets */,
+				9C73EE762D51EDCE00365ED0 /* Info.plist */,
+				9C73EE732D51EDCE00365ED0 /* Preview Content */,
+			);
+			path = MathVisionPro;
+			sourceTree = "<group>";
+		};
+		9C73EE692D51EDCB00365ED0 /* Packages */ = {
+			isa = PBXGroup;
+			children = (
+				9C73EE6A2D51EDCB00365ED0 /* RealityKitContent */,
+			);
+			path = Packages;
+			sourceTree = "<group>";
+		};
+		9C73EE732D51EDCE00365ED0 /* Preview Content */ = {
+			isa = PBXGroup;
+			children = (
+				9C73EE742D51EDCE00365ED0 /* Preview Assets.xcassets */,
+			);
+			path = "Preview Content";
+			sourceTree = "<group>";
+		};
+		9C73EE7E2D51EDCF00365ED0 /* MathVisionProTests */ = {
+			isa = PBXGroup;
+			children = (
+				9C73EE7F2D51EDCF00365ED0 /* MathVisionProTests.swift */,
+			);
+			path = MathVisionProTests;
+			sourceTree = "<group>";
+		};
+		9C73EED42D52046100365ED0 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXNativeTarget section */
+		9C73EE652D51EDCB00365ED0 /* MathVisionPro */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 9C73EE832D51EDCF00365ED0 /* Build configuration list for PBXNativeTarget "MathVisionPro" */;
+			buildPhases = (
+				9C73EE622D51EDCB00365ED0 /* Sources */,
+				9C73EE632D51EDCB00365ED0 /* Frameworks */,
+				9C73EE642D51EDCB00365ED0 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = MathVisionPro;
+			packageProductDependencies = (
+			);
+			productName = MathVisionPro;
+			productReference = 9C73EE662D51EDCB00365ED0 /* MathVisionPro.app */;
+			productType = "com.apple.product-type.application";
+		};
+		9C73EE7A2D51EDCF00365ED0 /* MathVisionProTests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 9C73EE862D51EDCF00365ED0 /* Build configuration list for PBXNativeTarget "MathVisionProTests" */;
+			buildPhases = (
+				9C73EE772D51EDCF00365ED0 /* Sources */,
+				9C73EE782D51EDCF00365ED0 /* Frameworks */,
+				9C73EE792D51EDCF00365ED0 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				9C73EE7D2D51EDCF00365ED0 /* PBXTargetDependency */,
+			);
+			name = MathVisionProTests;
+			productName = MathVisionProTests;
+			productReference = 9C73EE7B2D51EDCF00365ED0 /* MathVisionProTests.xctest */;
+			productType = "com.apple.product-type.bundle.unit-test";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		9C73EE5E2D51EDCB00365ED0 /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				BuildIndependentTargetsInParallel = 1;
+				LastSwiftUpdateCheck = 1620;
+				LastUpgradeCheck = 1620;
+				TargetAttributes = {
+					9C73EE652D51EDCB00365ED0 = {
+						CreatedOnToolsVersion = 15.4;
+					};
+					9C73EE7A2D51EDCF00365ED0 = {
+						CreatedOnToolsVersion = 15.4;
+						TestTargetID = 9C73EE652D51EDCB00365ED0;
+					};
+				};
+			};
+			buildConfigurationList = 9C73EE612D51EDCB00365ED0 /* Build configuration list for PBXProject "MathVisionPro" */;
+			compatibilityVersion = "Xcode 14.0";
+			developmentRegion = en;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				en,
+				Base,
+			);
+			mainGroup = 9C73EE5D2D51EDCB00365ED0;
+			packageReferences = (
+				9C73EED32D52043F00365ED0 /* XCLocalSwiftPackageReference "Packages/RealityKitContent" */,
+			);
+			productRefGroup = 9C73EE672D51EDCB00365ED0 /* Products */;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				9C73EE652D51EDCB00365ED0 /* MathVisionPro */,
+				9C73EE7A2D51EDCF00365ED0 /* MathVisionProTests */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXResourcesBuildPhase section */
+		9C73EE642D51EDCB00365ED0 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				9C73EE752D51EDCE00365ED0 /* Preview Assets.xcassets in Resources */,
+				9C73EE722D51EDCE00365ED0 /* Assets.xcassets in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		9C73EE792D51EDCF00365ED0 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXResourcesBuildPhase section */
+
+/* Begin PBXSourcesBuildPhase section */
+		9C73EE622D51EDCB00365ED0 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				9C73EE702D51EDCB00365ED0 /* ContentView.swift in Sources */,
+				9C73EE6E2D51EDCB00365ED0 /* MathVisionProApp.swift in Sources */,
+				3D23DA3B2D55155A00928993 /* VisualInputManager.swift in Sources */,
+				9C73EED22D52026900365ED0 /* MathKeyboardView.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		9C73EE772D51EDCF00365ED0 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				9C73EE802D51EDCF00365ED0 /* MathVisionProTests.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin PBXTargetDependency section */
+		9C73EE7D2D51EDCF00365ED0 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 9C73EE652D51EDCB00365ED0 /* MathVisionPro */;
+			targetProxy = 9C73EE7C2D51EDCF00365ED0 /* PBXContainerItemProxy */;
+		};
+/* End PBXTargetDependency section */
+
+/* Begin XCBuildConfiguration section */
+		9C73EE812D51EDCF00365ED0 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				ASSETCATALOG_COMPILER_GENERATE_SWIFT_ASSET_SYMBOL_EXTENSIONS = YES;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++20";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = YES;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = dwarf;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				ENABLE_TESTABILITY = YES;
+				ENABLE_USER_SCRIPT_SANDBOXING = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu17;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				LOCALIZATION_PREFERS_STRING_CATALOGS = YES;
+				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
+				MTL_FAST_MATH = YES;
+				ONLY_ACTIVE_ARCH = YES;
+				SDKROOT = xros;
+				SWIFT_ACTIVE_COMPILATION_CONDITIONS = "DEBUG $(inherited)";
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+				XROS_DEPLOYMENT_TARGET = 1.2;
+			};
+			name = Debug;
+		};
+		9C73EE822D51EDCF00365ED0 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				ASSETCATALOG_COMPILER_GENERATE_SWIFT_ASSET_SYMBOL_EXTENSIONS = YES;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++20";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = YES;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				ENABLE_NS_ASSERTIONS = NO;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				ENABLE_USER_SCRIPT_SANDBOXING = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu17;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				LOCALIZATION_PREFERS_STRING_CATALOGS = YES;
+				MTL_ENABLE_DEBUG_INFO = NO;
+				MTL_FAST_MATH = YES;
+				SDKROOT = xros;
+				SWIFT_COMPILATION_MODE = wholemodule;
+				VALIDATE_PRODUCT = YES;
+				XROS_DEPLOYMENT_TARGET = 1.2;
+			};
+			name = Release;
+		};
+		9C73EE842D51EDCF00365ED0 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_ASSET_PATHS = "\"MathVisionPro/Preview Content\"";
+				DEVELOPMENT_TEAM = PLK3USF64C;
+				ENABLE_PREVIEWS = YES;
+				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = "$(TARGET_NAME)/Info.plist";
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+				);
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = TygaSmart.MathVisionPro;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SUPPORTED_PLATFORMS = "xros xrsimulator";
+				SWIFT_EMIT_LOC_STRINGS = YES;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2,7";
+				XROS_DEPLOYMENT_TARGET = 2.0;
+			};
+			name = Debug;
+		};
+		9C73EE852D51EDCF00365ED0 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_ASSET_PATHS = "\"MathVisionPro/Preview Content\"";
+				DEVELOPMENT_TEAM = PLK3USF64C;
+				ENABLE_PREVIEWS = YES;
+				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = "$(TARGET_NAME)/Info.plist";
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+				);
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = TygaSmart.MathVisionPro;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SUPPORTED_PLATFORMS = "xros xrsimulator";
+				SWIFT_EMIT_LOC_STRINGS = YES;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2,7";
+				XROS_DEPLOYMENT_TARGET = 2.0;
+			};
+			name = Release;
+		};
+		9C73EE872D51EDCF00365ED0 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = S9N3X68T5T;
+				GENERATE_INFOPLIST_FILE = YES;
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = TygaSmart.MathVisionProTests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SUPPORTED_PLATFORMS = "xros xrsimulator";
+				SWIFT_EMIT_LOC_STRINGS = NO;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2,7";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/MathVisionPro.app/$(BUNDLE_EXECUTABLE_FOLDER_PATH)/MathVisionPro";
+				XROS_DEPLOYMENT_TARGET = 1.2;
+			};
+			name = Debug;
+		};
+		9C73EE882D51EDCF00365ED0 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = S9N3X68T5T;
+				GENERATE_INFOPLIST_FILE = YES;
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = TygaSmart.MathVisionProTests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SUPPORTED_PLATFORMS = "xros xrsimulator";
+				SWIFT_EMIT_LOC_STRINGS = NO;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2,7";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/MathVisionPro.app/$(BUNDLE_EXECUTABLE_FOLDER_PATH)/MathVisionPro";
+				XROS_DEPLOYMENT_TARGET = 1.2;
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		9C73EE612D51EDCB00365ED0 /* Build configuration list for PBXProject "MathVisionPro" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				9C73EE812D51EDCF00365ED0 /* Debug */,
+				9C73EE822D51EDCF00365ED0 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		9C73EE832D51EDCF00365ED0 /* Build configuration list for PBXNativeTarget "MathVisionPro" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				9C73EE842D51EDCF00365ED0 /* Debug */,
+				9C73EE852D51EDCF00365ED0 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		9C73EE862D51EDCF00365ED0 /* Build configuration list for PBXNativeTarget "MathVisionProTests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				9C73EE872D51EDCF00365ED0 /* Debug */,
+				9C73EE882D51EDCF00365ED0 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+/* End XCConfigurationList section */
+
+/* Begin XCLocalSwiftPackageReference section */
+		9C73EED32D52043F00365ED0 /* XCLocalSwiftPackageReference "Packages/RealityKitContent" */ = {
+			isa = XCLocalSwiftPackageReference;
+			relativePath = Packages/RealityKitContent;
+		};
+/* End XCLocalSwiftPackageReference section */
+	};
+	rootObject = 9C73EE5E2D51EDCB00365ED0 /* Project object */;
+}

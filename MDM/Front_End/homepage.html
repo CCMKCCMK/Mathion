@@ -1,0 +1,955 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=0">
+    <title>MATHION</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700&display=swap" rel="stylesheet">
+    <style>
+        /* 全局基础样式 */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: 'Roboto', sans-serif;
+            color: #333;
+            line-height: 1.6;
+            overflow-x: hidden;
+            background-color: #f9f9f9;
+        }
+        
+        /* 导航栏 */
+        .navbar {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            background-color: rgba(255, 255, 255, 0.95);
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 15px 40px;
+            z-index: 1000;
+            transition: all 0.3s ease;
+        }
+        
+        .navbar.scrolled {
+            padding: 10px 40px;
+            background-color: rgba(255, 255, 255, 0.98);
+        }
+        
+        .logo {
+            display: flex;
+            align-items: center;
+        }
+        
+        .logo img {
+            height: 40px;
+            margin-right: 10px;
+        }
+        
+        .logo h1 {
+            font-size: 22px;
+            font-weight: 700;
+            color: #000000;
+            margin: 0;
+        }
+        
+        /* 导航链接居中 */
+        .nav-container {
+            position: absolute;
+            left: 50%;
+            transform: translateX(-50%);
+        }
+        
+        .nav-links {
+            display: flex;
+            list-style-type: none;
+            justify-content: center;
+        }
+        
+        .nav-links li {
+            margin: 0 15px;
+        }
+        
+        .nav-links a {
+            text-decoration: none;
+            color: #4a5568;
+            font-weight: 500;
+            font-size: 16px;
+            transition: color 0.3s;
+            padding: 5px 0;
+            position: relative;
+        }
+        
+        .nav-links a:after {
+            content: '';
+            position: absolute;
+            width: 0;
+            height: 2px;
+            bottom: 0;
+            left: 0;
+            background-color: #4a89dc;
+            transition: width 0.3s;
+        }
+        
+        .nav-links a:hover {
+            color: #4a89dc;
+        }
+        
+        .nav-links a:hover:after {
+            width: 100%;
+        }
+        
+        .login-btn {
+            background-color: #4a89dc;
+            color: white;
+            border: none;
+            padding: 10px 24px;
+            border-radius: 25px;
+            font-weight: 500;
+            font-size: 15px;
+            cursor: pointer;
+            transition: all 0.3s;
+            box-shadow: 0 4px 12px rgba(74, 137, 220, 0.2);
+        }
+        
+        .login-btn:hover {
+            background-color: #3a79cc;
+            transform: translateY(-2px);
+            box-shadow: 0 6px 15px rgba(74, 137, 220, 0.3);
+        }
+        
+        .menu-toggle {
+            display: none;
+            font-size: 24px;
+            cursor: pointer;
+            color: #4a5568;
+        }
+        
+        /* 轮播组件 */
+        .slider-container {
+            margin-top: 70px;
+            position: relative;
+            width: 100%;
+            height: 80vh;
+            overflow: hidden;
+        }
+        
+        .slider {
+            width: 100%;
+            height: 100%;
+            position: relative;
+        }
+        
+        .slide {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            opacity: 0;
+            transition: opacity 1s ease-in-out;
+            background-size: cover;
+            background-position: center;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+            color: white;
+        }
+        
+        .slide.active {
+            opacity: 1;
+        }
+        
+        .slide-overlay {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.5);
+            z-index: 1;
+        }
+        
+        .slide-content {
+            position: relative;
+            z-index: 2;
+            max-width: 800px;
+            padding: 0 20px;
+        }
+        
+        .slide h2 {
+            font-size: 48px;
+            margin-bottom: 20px;
+            font-weight: 700;
+        }
+        
+        .slide p {
+            font-size: 18px;
+            margin-bottom: 30px;
+        }
+        
+        .slide-btn {
+            background-color: #4a89dc;
+            color: white;
+            border: none;
+            padding: 12px 30px;
+            border-radius: 30px;
+            font-weight: 500;
+            font-size: 16px;
+            cursor: pointer;
+            transition: all 0.3s;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+        }
+        
+        .slide-btn:hover {
+            background-color: #3a79cc;
+            transform: translateY(-2px);
+            box-shadow: 0 6px 20px rgba(0, 0, 0, 0.3);
+        }
+        
+        .slider-controls {
+            position: absolute;
+            bottom: 30px;
+            left: 50%;
+            transform: translateX(-50%);
+            display: flex;
+            z-index: 10;
+        }
+        
+        .slider-dot {
+            width: 12px;
+            height: 12px;
+            background-color: rgba(255, 255, 255, 0.5);
+            border-radius: 50%;
+            margin: 0 8px;
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+        
+        .slider-dot.active {
+            background-color: white;
+            transform: scale(1.3);
+        }
+        
+        /* 特点部分 */
+        .features {
+            padding: 100px 40px;
+            background-color: white;
+        }
+        
+        .section-title {
+            text-align: center;
+            margin-bottom: 60px;
+        }
+        
+        .section-title h2 {
+            font-size: 36px;
+            font-weight: 700;
+            color: #333;
+            margin-bottom: 15px;
+        }
+        
+        .section-title p {
+            font-size: 18px;
+            color: #666;
+            max-width: 700px;
+            margin: 0 auto;
+        }
+        
+        .features-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 40px;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+        
+        .feature-card {
+            background-color: #f9f9f9;
+            border-radius: 10px;
+            padding: 30px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.05);
+            transition: all 0.3s;
+            text-align: center;
+        }
+        
+        .feature-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 15px 40px rgba(0, 0, 0, 0.1);
+        }
+        
+        .feature-icon {
+            width: 70px;
+            height: 70px;
+            background-color: #4a89dc;
+            color: white;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 0 auto 20px;
+            font-size: 28px;
+        }
+        
+        .feature-card h3 {
+            font-size: 22px;
+            font-weight: 600;
+            margin-bottom: 15px;
+            color: #333;
+        }
+        
+        .feature-card p {
+            font-size: 16px;
+            color: #666;
+            line-height: 1.6;
+        }
+        
+        /* 关于部分 */
+        .about {
+            padding: 100px 40px;
+            background-color: #f0f5ff;
+        }
+        
+        .about-content {
+            display: flex;
+            flex-wrap: wrap;
+            align-items: center;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+        
+        .about-text {
+            flex: 1;
+            padding: 0 20px;
+            min-width: 300px;
+        }
+        
+        .about-image {
+            flex: 1;
+            padding: 0 20px;
+            min-width: 300px;
+        }
+        
+        .about-image img {
+            width: 100%;
+            border-radius: 10px;    
+            box-shadow: 0 15px 40px rgba(0, 0, 0, 0.1);
+        }
+        
+        .about-text h2 {
+            font-size: 36px;
+            font-weight: 700;
+            color: #333;
+            margin-bottom: 20px;
+        }
+        
+        .about-text p {
+            font-size: 16px;
+            color: #666;
+            line-height: 1.8;
+            margin-bottom: 20px;
+            text-align: justify;
+        }
+        
+        /* 调用行动部分 */
+        .cta {
+            padding: 80px 40px;
+            background-color: #4a89dc;
+            color: white;
+            text-align: center;
+        }
+        
+        .cta h2 {
+            font-size: 36px;
+            font-weight: 700;
+            margin-bottom: 20px;
+        }
+        
+        .cta p {
+            font-size: 18px;
+            max-width: 700px;
+            margin: 0 auto 30px;
+        }
+        
+        .cta-btn {
+            background-color: white;
+            color: #4a89dc;
+            border: none;
+            padding: 14px 36px;
+            border-radius: 30px;
+            font-weight: 600;
+            font-size: 16px;
+            cursor: pointer;
+            transition: all 0.3s;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+        }
+        
+        .cta-btn:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 8px 25px rgba(0, 0, 0, 0.2);
+        }
+        
+        /* 页脚 */
+        .footer {
+            background-color: #333;
+            color: #bbb;
+            padding: 60px 40px 30px;
+        }
+        
+        .footer-content {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 40px;
+        }
+        
+        .footer-column h3 {
+            font-size: 18px;
+            font-weight: 600;
+            color: white;
+            margin-bottom: 20px;
+        }
+        
+        .footer-column ul {
+            list-style-type: none;
+        }
+        
+        .footer-column ul li {
+            margin-bottom: 10px;
+        }
+        
+        .footer-column a {
+            text-decoration: none;
+            color: #bbb;
+            transition: color 0.3s;
+        }
+        
+        .footer-column a:hover {
+            color: white;
+        }
+        
+        .footer-bottom {
+            max-width: 1200px;
+            margin: 30px auto 0;
+            padding-top: 20px;
+            border-top: 1px solid #444;
+            text-align: center;
+            font-size: 14px;
+        }
+        
+        /* 登录弹窗 */
+        .login-modal {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.5);
+            z-index: 2000;
+            justify-content: center;
+            align-items: center;
+        }
+        
+        .login-modal.show {
+            display: flex;
+        }
+        
+        .login-form {
+            background-color: white;
+            border-radius: 10px;
+            padding: 30px;
+            width: 100%;
+            max-width: 400px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+            position: relative;
+        }
+        
+        .login-form h2 {
+            text-align: center;
+            margin-bottom: 30px;
+            color: #333;
+            font-size: 24px;
+        }
+        
+        .form-group {
+            margin-bottom: 20px;
+        }
+        
+        .form-group label {
+            display: block;
+            margin-bottom: 8px;
+            font-weight: 500;
+            color: #4a5568;
+        }
+        
+        .form-group input {
+            width: 100%;
+            padding: 12px 15px;
+            border: 1px solid #ddd;
+            border-radius: 6px;
+            font-size: 15px;
+            transition: all 0.3s;
+        }
+        
+        .form-group input:focus {
+            border-color: #4a89dc;
+            box-shadow: 0 0 0 3px rgba(74, 137, 220, 0.1);
+            outline: none;
+        }
+        
+        .form-actions {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-top: 30px;
+        }
+        
+        .remember-me {
+            display: flex;
+            align-items: center;
+        }
+        
+        .remember-me input {
+            margin-right: 10px;
+        }
+        
+        .forgot-password {
+            color: #4a89dc;
+            text-decoration: none;
+            font-size: 14px;
+            transition: color 0.3s;
+        }
+        
+        .forgot-password:hover {
+            color: #3a79cc;
+            text-decoration: underline;
+        }
+        
+        .login-submit {
+            display: block;
+            width: 100%;
+            padding: 12px;
+            margin-top: 20px;
+            background-color: #4a89dc;
+            color: white;
+            border: none;
+            border-radius: 6px;
+            font-weight: 500;
+            font-size: 16px;
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+        
+        .login-submit:hover {
+            background-color: #3a79cc;
+        }
+        
+        .create-account {
+            text-align: center;
+            margin-top: 20px;
+            font-size: 14px;
+            color: #666;
+        }
+        
+        .create-account a {
+            color: #4a89dc;
+            text-decoration: none;
+            font-weight: 500;
+            transition: color 0.3s;
+        }
+        
+        .create-account a:hover {
+            color: #3a79cc;
+            text-decoration: underline;
+        }
+        
+        .close-modal {
+            position: absolute;
+            top: 15px;
+            right: 15px;
+            font-size: 24px;
+            color: #999;
+            background: none;
+            border: none;
+            cursor: pointer;
+            transition: color 0.3s;
+        }
+        
+        .close-modal:hover {
+            color: #333;
+        }
+        
+        /* 响应式设计 */
+        @media (max-width: 992px) {
+            .navbar {
+                padding: 15px 20px;
+            }
+            
+            .navbar.scrolled {
+                padding: 10px 20px;
+            }
+            
+            .nav-container {
+                position: static;
+                transform: none;
+            }
+            
+            .nav-links {
+                position: fixed;
+                top: 70px;
+                left: -100%;
+                width: 80%;
+                height: calc(100vh - 70px);
+                background-color: white;
+                flex-direction: column;
+                padding: 20px;
+                transition: left 0.3s ease;
+                box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+                justify-content: flex-start;
+            }
+            
+            .nav-links.active {
+                left: 0;
+            }
+            
+            .nav-links li {
+                margin: 15px 0;
+            }
+            
+            .menu-toggle {
+                display: block;
+            }
+            
+            .slide h2 {
+                font-size: 36px;
+            }
+            
+            .slide p {
+                font-size: 16px;
+            }
+        }
+        
+        @media (max-width: 768px) {
+            .slide h2 {
+                font-size: 28px;
+            }
+            
+            .slide p {
+                font-size: 14px;
+            }
+            
+            .about-content {
+                flex-direction: column;
+            }
+            
+            .about-text, .about-image {
+                width: 100%;
+                padding: 20px;
+            }
+        }
+        
+        @media (max-width: 480px) {
+            .slide h2 {
+                font-size: 24px;
+            }
+            
+            .features, .about, .cta {
+                padding: 60px 20px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- 导航栏 -->
+    <nav class="navbar">
+        <div class="logo">
+            <img src="favicon.ico" alt="MATHION Logo">
+            <h1>MATHION</h1>
+        </div>
+        
+        <div class="nav-container">
+            <ul class="nav-links" id="nav-links">
+                <li><a href="#home">Home</a></li>
+                <li><a href="#features">Features</a></li>
+                <li><a href="#about">About</a></li>
+                <li><a href="#contact">Start</a></li>
+            </ul>
+        </div>
+        
+        <div class="menu-toggle" id="menu-toggle">
+            <i class="fas fa-bars"></i>
+        </div>
+        <button class="login-btn" id="login-btn">Login</button>
+    </nav>
+    
+    <!-- 轮播组件 -->
+    <div class="slider-container" id="home">
+        <div class="slider" id="slider">
+            <!-- 轮播图1 -->
+            <div class="slide active" style="background-image: url('data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMTIwMCIgaGVpZ2h0PSI2MDAiIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyI+CiAgICA8ZGVmcz4KICAgICAgICA8bGluZWFyR3JhZGllbnQgaWQ9ImdyYWQxIiB4MT0iMCUiIHkxPSIwJSIgeDI9IjEwMCUiIHkyPSIxMDAlIj4KICAgICAgICAgICAgPHN0b3Agb2Zmc2V0PSIwJSIgc3RvcC1jb2xvcj0iIzQyODdmNSIgLz4KICAgICAgICAgICAgPHN0b3Agb2Zmc2V0PSIxMDAlIiBzdG9wLWNvbG9yPSIjMTM0N2IzIiAvPgogICAgICAgIDwvbGluZWFyR3JhZGllbnQ+CiAgICA8L2RlZnM+CiAgICA8cmVjdCB3aWR0aD0iMTIwMCIgaGVpZ2h0PSI2MDAiIGZpbGw9InVybCgjZ3JhZDEpIiAvPgogICAgPGcgZmlsbD0icmdiYSgyNTUsMjU1LDI1NSwwLjEpIj4KICAgICAgICA8Y2lyY2xlIGN4PSIyMDAiIGN5PSIzMDAiIHI9IjgwIiAvPgogICAgICAgIDxjaXJjbGUgY3g9IjQwMCIgY3k9IjQwMCIgcj0iNjAiIC8+CiAgICAgICAgPGNpcmNsZSBjeD0iOTAwIiBjeT0iMjAwIiByPSIxMDAiIC8+CiAgICAgICAgPGNpcmNsZSBjeD0iMTEwMCIgY3k9IjQwMCIgcj0iNzAiIC8+CiAgICAgICAgPGNpcmNsZSBjeD0iNzAwIiBjeT0iMzUwIiByPSI5MCIgLz4KICAgIDwvZz4KICAgIDxwYXRoIGQ9Ik01MDAgNDAwbDEwMC01MHY4MGwtMTAwIDUweiIgZmlsbD0icmdiYSgyNTUsMjU1LDI1NSwwLjIpIi8+CiAgICA8cGF0aCBkPSJNODAwIDMwMGwtNTAgMzB2LTEwMGw1MC0zMHoiIGZpbGw9InJnYmEoMjU1LDI1NSwyNTUsMC4yKSIvPgogICAgPHBhdGggZD0iTTMwMCAyMDBsMjAwIDEwMHYtNTBsLTIwMC0xMDB6IiBmaWxsPSJyZ2JhKDI1NSwyNTUsMjU1LDAuMikiLz4KPC9zdmc+');">
+                <div class="slide-overlay"></div>
+                <div class="slide-content">
+                    <h2>Making Math Accessible to All</h2>
+                    <p>MATHION empowers students with disabilities through Apple Vision Pro technology, enabling LaTeX formula input and making mathematics education inclusive.</p>
+                    <button class="slide-btn">Learn More</button>
+                </div>
+            </div>
+            <!-- 轮播图2 -->
+            <div class="slide" style="background-image: url('data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMTIwMCIgaGVpZ2h0PSI2MDAiIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyI+CiAgICA8ZGVmcz4KICAgICAgICA8bGluZWFyR3JhZGllbnQgaWQ9ImdyYWQyIiB4MT0iMCUiIHkxPSIwJSIgeDI9IjEwMCUiIHkyPSIxMDAlIj4KICAgICAgICAgICAgPHN0b3Agb2Zmc2V0PSIwJSIgc3RvcC1jb2xvcj0iIzJlYTg4MyIgLz4KICAgICAgICAgICAgPHN0b3Agb2Zmc2V0PSIxMDAlIiBzdG9wLWNvbG9yPSIjMDU3YTU1IiAvPgogICAgICAgIDwvbGluZWFyR3JhZGllbnQ+CiAgICA8L2RlZnM+CiAgICA8cmVjdCB3aWR0aD0iMTIwMCIgaGVpZ2h0PSI2MDAiIGZpbGw9InVybCgjZ3JhZDIpIiAvPgogICAgPGcgc3Ryb2tlPSJyZ2JhKDI1NSwyNTUsMjU1LDAuMikiIHN0cm9rZS13aWR0aD0iMiIgZmlsbD0ibm9uZSI+CiAgICAgICAgPGNpcmNsZSBjeD0iMzAwIiBjeT0iMjAwIiByPSI4MCIgLz4KICAgICAgICA8cmVjdCB4PSI1MDAiIHk9IjE1MCIgd2lkdGg9IjE1MCIgaGVpZ2h0PSIxNTAiIC8+CiAgICAgICAgPHBhdGggZD0iTTgwMCAyMDBsNTAgMTAwbDUwIC0xMDBoLTEwMHoiIC8+CiAgICAgICAgPHBhdGggZD0iTTMwMCA0MDBsMjAwIDEwMGwtMjAwIDEwMHoiIC8+CiAgICAgICAgPHBhdGggZD0iTTkwMCAzNTBhNTAgNTAgMCAxIDAgMTAwIDBhNTAgNTAgMCAxIDAgLTEwMCAwIiAvPgogICAgPC9nPgogICAgPGcgZmlsbD0icmdiYSgyNTUsMjU1LDI1NSwwLjEpIj4KICAgICAgICA8Y2lyY2xlIGN4PSIyMDAiIGN5PSI0MDAiIHI9IjUwIiAvPgogICAgICAgIDxjaXJjbGUgY3g9IjcwMCIgY3k9IjMwMCIgcj0iNzAiIC8+CiAgICAgICAgPGNpcmNsZSBjeD0iMTEwMCIgY3k9IjIwMCIgcj0iNDAiIC8+CiAgICA8L2c+Cjwvc3ZnPg==');">
+                <div class="slide-overlay"></div>
+                <div class="slide-content">
+                    <h2>LaTeX Formula Input Made Easy</h2>
+                    <p>Our innovative eye-tracking and gesture control system allows students with mobility impairments to create complex mathematical formulas with ease.</p>
+                    <button class="slide-btn">Explore Features</button>
+                </div>
+            </div>
+            <!-- 轮播图3 -->
+            <div class="slide" style="background-image: url('data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMTIwMCIgaGVpZ2h0PSI2MDAiIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyI+CiAgICA8ZGVmcz4KICAgICAgICA8bGluZWFyR3JhZGllbnQgaWQ9ImdyYWQzIiB4MT0iMCUiIHkxPSIwJSIgeDI9IjEwMCUiIHkyPSIxMDAlIj4KICAgICAgICAgICAgPHN0b3Agb2Zmc2V0PSIwJSIgc3RvcC1jb2xvcj0iIzlkNTZiMyIgLz4KICAgICAgICAgICAgPHN0b3Agb2Zmc2V0PSIxMDAlIiBzdG9wLWNvbG9yPSIjNWQzNDZiIiAvPgogICAgICAgIDwvbGluZWFyR3JhZGllbnQ+CiAgICA8L2RlZnM+CiAgICA8cmVjdCB3aWR0aD0iMTIwMCIgaGVpZ2h0PSI2MDAiIGZpbGw9InVybCgjZ3JhZDMpIiAvPgogICAgPGcgZmlsbD0icmdiYSgyNTUsMjU1LDI1NSwwLjEpIj4KICAgICAgICA8cGF0aCBkPSJNMCAyMDBsNTAgLTUwaDEwMGwtNTAgNTB6IiAvPgogICAgICAgIDxwYXRoIGQ9Ik0zMDAgMTAwbDUwIC01MGgxMDBsLTUwIDUweiIgLz4KICAgICAgICA8cGF0aCBkPSJNNjAwIDEwMGw1MCAtNTBoMTAwbC01MCA1MHoiIC8+CiAgICAgICAgPHBhdGggZD0iTTkwMCAxMDBsNTAgLTUwaDEwMGwtNTAgNTB6IiAvPgogICAgICAgIDxwYXRoIGQ9Ik0xNTAgMzAwbDUwIC01MGgxMDBsLTUwIDUweiIgLz4KICAgICAgICA8cGF0aCBkPSJNNDUwIDMwMGw1MCAtNTBoMTAwbC01MCA1MHoiIC8+CiAgICAgICAgPHBhdGggZD0iTTc1MCAzMDBsNTAgLTUwaDEwMGwtNTAgNTB6IiAvPgogICAgICAgIDxwYXRoIGQ9Ik0xMDUwIDMwMGw1MCAtNTBoMTAwbC01MCA1MHoiIC8+CiAgICAgICAgPHBhdGggZD0iTTAgNTAwbDUwIC01MGgxMDBsLTUwIDUweiIgLz4KICAgICAgICA8cGF0aCBkPSJNMzAwIDUwMGw1MCAtNTBoMTAwbC01MCA1MHoiIC8+CiAgICAgICAgPHBhdGggZD0iTTYwMCA1MDBsNTAgLTUwaDEwMGwtNTAgNTB6IiAvPgogICAgICAgIDxwYXRoIGQ9Ik05MDAgNTAwbDUwIC01MGgxMDBsLTUwIDUweiIgLz4KICAgIDwvZz4KICAgIDxnIGZpbGw9InJnYmEoMjU1LDI1NSwyNTUsMC4yKSI+CiAgICAgICAgPGNpcmNsZSBjeD0iMTAwIiBjeT0iMTAwIiByPSIzMCIgLz4KICAgICAgICA8Y2lyY2xlIGN4PSI1MDAiIGN5PSIyMDAiIHI9IjUwIiAvPgogICAgICAgIDxjaXJjbGUgY3g9IjgwMCIgY3k9IjQwMCIgcj0iNDAiIC8+CiAgICAgICAgPGNpcmNsZSBjeD0iMzAwIiBjeT0iNDUwIiByPSIyNSIgLz4KICAgICAgICA8Y2lyY2xlIGN4PSIxMDUwIiBjeT0iMTUwIiByPSIzNSIgLz4KICAgIDwvZz4KPC9zdmc+');">
+                <div class="slide-overlay"></div>
+                <div class="slide-content">
+                    <h2>Bridging the Accessibility Gap</h2>
+                    <p>Our platform removes barriers to mathematics education for students with disabilities, providing equal opportunities through adaptive technology.</p>
+                    <button class="slide-btn">Get Started</button>
+                </div>
+            </div>
+        </div>
+        
+        <!-- 轮播控制点 -->
+        <div class="slider-controls">
+            <div class="slider-dot active" data-slide="0"></div>
+            <div class="slider-dot" data-slide="1"></div>
+            <div class="slider-dot" data-slide="2"></div>
+        </div>
+    </div>
+    
+    <!-- 特点部分 -->
+    <div class="features" id="features">
+        <div class="section-title">
+            <h2>Why Choose MATHION?</h2>
+            <p>Empowering students with disabilities through accessible LaTeX formula input and Apple Vision Pro technology</p>
+        </div>
+        
+        <div class="features-grid">
+            <div class="feature-card">
+                <div class="feature-icon">
+                    <i class="fas fa-universal-access"></i>
+                </div>
+                <h3>Accessibility First</h3>
+                <p>Designed with accessibility as the core principle, empowering students with physical disabilities to participate fully in mathematics education.</p>
+            </div>
+            
+            <div class="feature-card">
+                <div class="feature-icon">
+                    <i class="fas fa-eye"></i>
+                </div>
+                <h3>Eye-Tracking Input</h3>
+                <p>Advanced eye-tracking technology enables students to select and place LaTeX elements precisely with just their eye movements.</p>
+            </div>
+            
+            <div class="feature-card">
+                <div class="feature-icon">
+                    <i class="fas fa-hand-paper"></i>
+                </div>
+                <h3>Gesture Control</h3>
+                <p>Intuitive gesture recognition allows students to manipulate formulas with minimal physical movement, adapting to various mobility capabilities.</p>
+            </div>
+            
+            <div class="feature-card">
+                <div class="feature-icon">
+                    <i class="fas fa-square-root-alt"></i>
+                </div>
+                <h3>LaTeX Formula Builder</h3>
+                <p>User-friendly interface for creating complex mathematical formulas with LaTeX notation, complete with real-time preview and validation.</p>
+            </div>
+            
+            <div class="feature-card">
+                <div class="feature-icon">
+                    <i class="fas fa-chalkboard-teacher"></i>
+                </div>
+                <h3>Teacher Support Tools</h3>
+                <p>Specialized dashboard for educators to track student progress, provide assistance, and adapt teaching approaches to individual needs.</p>
+            </div>
+            
+            <div class="feature-card">
+                <div class="feature-icon">
+                    <i class="fas fa-file-export"></i>
+                </div>
+                <h3>Export & Integration</h3>
+                <p>Export formulas to multiple formats and integrate with popular learning management systems, making homework submission seamless.</p>
+            </div>
+        </div>
+    </div>
+    
+    <!-- 关于部分 -->
+    <div class="about" id="about">
+        <div class="about-content">
+            <div class="about-text">
+                <h2>About MATHION</h2>
+                <p>MATHION was created to address a critical gap in educational accessibility. While digital learning has advanced rapidly, students with physical disabilities often face significant barriers when working with mathematical formulas and equations. Traditional input methods can be impossible for those with limited mobility.</p>
+                <p>Our team of accessibility experts, mathematics educators, and developers collaborated with students with disabilities to create a solution that leverages the spatial computing capabilities of Apple Vision Pro. By integrating eye-tracking, gesture recognition, and voice commands, we've developed an intuitive system that allows students to create complex LaTeX formulas without traditional keyboard and mouse inputs.</p>
+                <p>We believe that all students deserve equal access to quality mathematics education. MATHION represents our commitment to making the abstract language of mathematics accessible to everyone, regardless of physical ability.</p>
+            </div>
+            <div class="about-image">
+                <!-- 此处放置您自己的图片 -->
+                <img src="./img/vp.png" alt="MATHION Interface">
+            </div>
+        </div>
+    </div>
+    
+    <!-- 调用行动部分 -->
+    <div class="cta">
+        <h2>Empowering Educational Equality</h2>
+        <p>Join our community of educators and students who are breaking down barriers to mathematics education and creating more inclusive learning environments.</p>
+        <button class="cta-btn" id="cta-login-btn">Get Started Today</button>
+    </div>
+    
+    <!-- 页脚 -->
+    <div class="footer" id="contact">
+        <div class="footer-content">
+            <div class="footer-column">
+                <h3>MATHION</h3>
+                <ul>
+                    <li><a href="#about">About Us</a></li>
+                    <li><a href="#features">Features</a></li>
+                    <li><a href="#">Success Stories</a></li>
+                    <li><a href="#">Accessibility Statement</a></li>
+                </ul>
+            </div>
+            
+            <div class="footer-column">
+                <h3>Resources</h3>
+                <ul>
+                    <li><a href="#">Documentation</a></li>
+                    <li><a href="#">Tutorial Videos</a></li>
+                    <li><a href="#">LaTeX Reference</a></li>
+                    <li><a href="#">Support</a></li>
+                </ul>
+            </div>
+            
+            <div class="footer-column">
+                <h3>Legal</h3>
+                <ul>
+                    <li><a href="#">Privacy Policy</a></li>
+                    <li><a href="#">Terms of Service</a></li>
+                    <li><a href="#">Accessibility Compliance</a></li>
+                    <li><a href="#">Security</a></li>
+                </ul>
+            </div>
+            
+            <div class="footer-column">
+                <h3>Contact Us</h3>
+                <ul>
+                    <li><a href="mailto:info@mathion.com">Email: info@mathion.com</a></li>
+                    <li><a href="tel:+85253137630">Tel: (852) 53137630</a></li>
+                    <li><a href="#">Support Ticket</a></li>
+                    <li><a href="#">Feedback</a></li>
+                </ul>
+            </div>
+        </div>
+        
+        <div class="footer-bottom">
+            <p>&copy; 2025 MATHION. All rights reserved. | Ready Player One</p>
+        </div>
+    </div>
+    
+    <!-- JavaScript 代码 -->
+    <script>
+        // 导航菜单相关
+        const menuToggle = document.getElementById('menu-toggle');
+        const navLinks = document.getElementById('nav-links');
+        
+        menuToggle.addEventListener('click', () => {
+            navLinks.classList.toggle('active');
+        });
+        
+        // 导航栏滚动效果
+        window.addEventListener('scroll', () => {
+            const navbar = document.querySelector('.navbar');
+            if (window.scrollY > 50) {
+                navbar.classList.add('scrolled');
+            } else {
+                navbar.classList.remove('scrolled');
+            }
+        });
+        
+        // 轮播图自动切换
+        let currentSlide = 0;
+        const slides = document.querySelectorAll('.slide');
+        const dots = document.querySelectorAll('.slider-dot');
+        const totalSlides = slides.length;
+        
+        // 设置轮播图自动切换
+        setInterval(() => {
+            changeSlide(currentSlide + 1);
+        }, 5000);
+        
+        // 切换轮播图的函数
+        function changeSlide(n) {
+            // 移除当前激活的slide和dot的class
+            slides[currentSlide].classList.remove('active');
+            dots[currentSlide].classList.remove('active');
+            
+            // 计算新的slide索引
+            currentSlide = (n + totalSlides) % totalSlides;
+            
+            // 添加新激活的slide和dot的class
+            slides[currentSlide].classList.add('active');
+            dots[currentSlide].classList.add('active');
+        }
+        
+        // 点击轮播点切换轮播图
+        dots.forEach((dot, index) => {
+            dot.addEventListener('click', () => {
+                changeSlide(index);
+            });
+        });
+        
+        // 平滑滚动到锚点
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function(e) {
+                e.preventDefault();
+                
+                const targetId = this.getAttribute('href');
+                if (targetId === '#') return;
+                
+                const targetElement = document.querySelector(targetId);
+                if (targetElement) {
+                    window.scrollTo({
+                        top: targetElement.offsetTop - 70,
+                        behavior: 'smooth'
+                    });
+                    
+                    // 如果在移动设备上点击导航链接，收起菜单
+                    navLinks.classList.remove('active');
+                }
+            });
+        });
+
+        // 登录按钮跳转
+        const loginBtn = document.getElementById('login-btn');
+        const ctaLoginBtn = document.getElementById('cta-login-btn');
+
+        // 导航栏登录按钮点击事件
+        loginBtn.addEventListener('click', () => {
+            window.location.href = "login.html";
+        });
+
+        // CTA区域登录按钮点击事件
+        ctaLoginBtn.addEventListener('click', () => {
+            window.location.href = "login.html";
+        });
+        
+    </script>
+</body>
+</html>

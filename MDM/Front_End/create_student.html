@@ -1,0 +1,380 @@
+<!DOCTYPE html>
+<html lang="">
+<head>
+  <meta charset="utf-8">
+  <meta name="renderer" content="webkit">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Create New Student | MATHION</title>
+  <link rel="stylesheet" href="./css/lib/bootstrap.min.css">
+  <link rel="stylesheet" href="./layer/theme/default/layer.css">
+  <link rel="stylesheet" href="./css/common.css">
+  <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
+  <style>
+    body {
+            margin: 0;
+            padding: 0;
+            font-family: 'Roboto', sans-serif;
+            position: relative;
+            min-height: 100vh;
+            background-color: #f5f7fa;
+            color: #333;
+        }
+        /* 页头 */
+        #header {
+            background-color: #fff;
+            padding: 15px 20px;
+            border-bottom: 1px solid #eee;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            position: relative;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.05);
+        }
+        #header h1 {
+            margin: 0;
+            font-size: 22px;
+            text-align: center;
+            color: #3a3a3a;
+            font-weight: 500;
+        }
+        /* 用户信息区域：绝对定位到页头右侧 */
+        #user-menu {
+            position: absolute;
+            right: 20px;
+            top: 50%;
+            transform: translateY(-50%);
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            padding: 8px 12px;
+            border-radius: 20px;
+            transition: all 0.3s;
+        }
+        #user-menu:hover {
+            background-color: #f0f5ff;
+        }
+        #user-menu::before {
+            content: '\f007';
+            font-family: 'Font Awesome 5 Free';
+            font-weight: 900;
+            margin-right: 8px;
+            color: #4a89dc;
+        }
+        #user-menu span {
+            font-weight: 500;
+            color: #4a5568;
+        }
+        /* 下拉菜单 */
+        #dropdown {
+            display: none;
+            position: absolute;
+            right: 0;
+            top: 100%;
+            background-color: #fff;
+            border-radius: 8px;
+            border: none;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+            width: 150px;
+            z-index: 100;
+            overflow: hidden;
+            margin-top: 8px;
+        }
+        #dropdown a {
+            display: flex;
+            padding: 12px 16px;
+            text-decoration: none;
+            color: #4a5568;
+            transition: all 0.2s;
+            align-items: center;
+        }
+        #dropdown a:hover {
+            background-color: #f0f5ff;
+            color: #4a89dc;
+        }
+        #dropdown a::before {
+            font-family: 'Font Awesome 5 Free';
+            font-weight: 900;
+            margin-right: 8px;
+        }
+        #personalInfo::before {
+            content: '\f007';
+        }
+        #logout::before {
+            content: '\f2f5';
+        }
+        /* 内容区域 */
+        #content {
+            padding: 30px;
+            padding-bottom: 80px; /* 避免与底部重叠 */
+        }
+        /* 搜索区域 */
+        #search-container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 20px;
+        }
+        
+        .left-buttons, .right-buttons {
+            display: flex;
+            gap: 15px;
+            align-items: center;
+        }
+        
+        .search-box {
+            display: flex;
+            gap: 10px;
+            align-items: center;
+        }
+        
+        /* 美化搜索框 */
+        #search_input {
+            padding: 10px 15px;
+            border: 1px solid #ddd;
+            border-radius: 6px;
+            font-size: 14px;
+            width: 250px;
+            transition: all 0.3s;
+            background-color: #f8f9fa;
+        }
+        #search_input:focus {
+            border-color: #4a89dc;
+            box-shadow: 0 0 0 3px rgba(74, 137, 220, 0.1);
+            outline: none;
+            background-color: #fff;
+        }
+        /* 表格样式优化 */
+        table#table, table#table th, table#table td {
+            text-align: center;
+            border: none;
+        }
+        .reponsetable {
+            border-radius: 8px;
+            overflow: hidden;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.05);
+            margin-bottom: 30px;
+        }
+        .reponsetable thead tr {
+            background-color: #4a89dc;
+            color: white;
+        }
+        .reponsetable thead th {
+            padding: 15px !important;
+            font-weight: 500;
+            border: none !important;
+        }
+        .reponsetable tbody tr {
+            background-color: white;
+            transition: all 0.2s;
+        }
+        .reponsetable tbody tr:hover {
+            background-color: #f0f5ff;
+        }
+        .reponsetable tbody td {
+            padding: 15px !important;
+            border-bottom: 1px solid #eee !important;
+            color: #4a5568;
+        }
+        .btn-standard {
+            padding: 10px 16px;
+            border: none;
+            border-radius: 6px;
+            color: #fff;
+            font-size: 14px;
+            cursor: pointer;
+            font-weight: 500;
+            transition: all 0.3s;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            min-width: 120px;
+            background-color: #4a89dc;
+        }
+        .btn-standard:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+        }
+        .btn-success {
+            background-color: #2ecc71;
+        }
+        .btn-success:hover {
+            background-color: #27ae60;
+        }
+        .btn-purple {
+            background-color: #9b59b6;
+        }
+        .btn-purple:hover {
+            background-color: #8e44ad;
+        }
+        /* 按钮内图标 */
+        .btn-standard i {
+            margin-right: 5px;
+        }
+        /* 底部 */
+        #footer {
+            position: fixed;
+            bottom: 0;
+            left: 0;
+            width: 100%;
+            background-color: #fff;
+            text-align: center;
+            padding: 15px 0;
+            border-top: 1px solid #eee;
+            font-size: 14px;
+            color: #777;
+            box-shadow: 0 -2px 10px rgba(0, 0, 0, 0.05);
+        }
+        /* 卡片容器样式 */
+        .card-container {
+            background-color: white;
+            border-radius: 8px;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.05);
+            padding: 25px;
+            margin-bottom: 25px;
+        }
+        /* 响应式调整 */
+        @media (max-width: 1200px) {
+            #search-container {
+                flex-direction: column;
+                align-items: stretch;
+            }
+            
+            .left-buttons, .right-buttons {
+                flex-wrap: wrap;
+                justify-content: center;
+            }
+            
+            .search-box {
+                width: 100%;
+                justify-content: center;
+            }
+            
+            #search_input {
+                width: 100%;
+                max-width: 400px;
+            }
+        }
+  </style>
+</head>
+<body>
+  <!-- 共用页头 -->
+  <div id="header">
+      <h1>Create New Student</h1>
+      <div id="user-menu">
+          <span id="username">User</span>
+          <div id="dropdown">
+              <a href="#" id="personalInfo">Personal Info</a>
+              <a href="#" id="logout">Logout</a>
+          </div>
+      </div>
+  </div>
+
+  <div class="content-container">
+    <div class="card-container">
+      <form id="createForm" onsubmit="return submitForm()">
+        <div class="form-group">
+          <label class="control-label">Student Name</label>
+          <div class="controls">
+            <input type="text" id="studentName" required>
+          </div>
+        </div>
+        
+        <div class="form-group">
+          <label class="control-label">Student ID</label>
+          <div class="controls">
+            <input type="text" id="studentId" required>
+          </div>
+        </div>
+        
+        <div class="form-group">
+          <label class="control-label">Account</label>
+          <div class="controls">
+            <input type="text" id="studentAccount" required>
+          </div>
+        </div>
+
+        <div class="btn-container">
+          <button type="button" class="btn-standard btn-cancel" onclick="window.history.back()">
+            <i class="fas fa-times"></i> Cancel
+          </button>
+          <button type="submit" class="btn-standard">
+            <i class="fas fa-save"></i> Create Student
+          </button>
+        </div>
+      </form>
+    </div>
+  </div>
+
+  <!-- 共用页脚 -->
+  <div id="footer">
+      <div>Version 1.0 | Contact Us: (852) 53137630</div>
+      <div>©Copyright Ready Player One</div>
+  </div>
+  <script src="./js/config.js?v=2"></script>
+  <script src="./js/jquery.min.js?v=2"></script>
+  <script src="./layer/layer.js?v=2"></script>
+  <script src="./js/common.js?v=2"></script>
+  <script type="text/javascript">
+    const teacherName = sessionStorage.getItem("user_name");
+    $("#username").text(teacherName);
+      // 用户菜单相关事件
+    $("#user-menu").click(function(e){
+            $("#dropdown").toggle();
+            e.stopPropagation();
+    });
+    $(document).click(function(){
+        $("#dropdown").hide();
+    });
+    
+    $("#personalInfo").click(function(e){
+        e.preventDefault();
+        window.location.href = "personal.html";
+      });
+      
+    $("#logout").click(function(e){
+        e.preventDefault(); 
+        sendAjaxRequest("/user/logout", "DELETE", {}, 
+            function() {
+                window.location.href = "homepage.html";
+            },
+            function(error) {
+                console.error("Logout error:", error);
+                showErrorMessage("Logout failed. Please try again.");
+            }
+        );
+    });
+    function submitForm() {
+      const studentData = {
+        name: $('#studentName').val().trim(),
+        studentId: $('#studentId').val().trim(),
+        account: $('#studentAccount').val().trim()
+      };
+
+      if (!studentData.name || !studentData.studentId || !studentData.account) {
+        layer.msg('Please fill all required fields', {icon: 2});
+        return false;
+      }
+
+      sendAjaxRequest('/student/create', 'POST', studentData,
+        function(response) {
+          if(response.code === 200) {
+            layer.msg('Student created successfully', {icon: 1});
+            setTimeout(() => window.location.href = 'information.html', 1500);
+          } else {
+            layer.msg(response.message || 'Creation failed', {icon: 2});
+          }
+        },
+        function(error) {
+          console.error('Error:', error);
+          layer.msg('Request failed', {icon: 2});
+        }
+      );
+      
+      return false;
+    }
+  </script>
+</body>
+</html> 

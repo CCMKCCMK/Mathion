@@ -1,0 +1,618 @@
+<!DOCTYPE html>
+<html lang="">
+<head>
+    <meta charset="utf-8">
+    <meta name="renderer" content="webkit">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=0">
+    <title>Vision Pro Management | MATHION</title>
+    <link rel="stylesheet" href="./css/lib/bootstrap.min.css">
+    <link rel="stylesheet" href="./layer/theme/default/layer.css">
+    <link rel="stylesheet" type="text/css" href="./css/reponse.css">
+    <link rel="stylesheet" type="text/css" href="./css/custom.css">
+    <link rel="stylesheet" type="text/css" href="./css/common.css">
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
+    <style>
+        /* 全局基础样式 */
+        body {
+            margin: 0;
+            padding: 0;
+            font-family: 'Roboto', sans-serif;
+            position: relative;
+            min-height: 100vh;
+            background-color: #f5f7fa;
+            color: #333;
+        }
+        /* 页头 */
+        #header {
+            background-color: #fff;
+            padding: 15px 20px;
+            border-bottom: 1px solid #eee;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            position: relative;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.05);
+        }
+        #header h1 {
+            margin: 0;
+            font-size: 22px;
+            text-align: center;
+            color: #3a3a3a;
+            font-weight: 500;
+        }
+        /* 返回按钮：绝对定位到页头左侧 */
+        .btn-back {
+            position: absolute;
+            left: 20px;
+            top: 50%;
+            transform: translateY(-50%);
+            display: flex;
+            align-items: center;
+            padding: 8px 12px;
+            border-radius: 6px;
+            background-color: #f0f5ff;
+            color: #4a89dc;
+            border: none;
+            cursor: pointer;
+            font-weight: 500;
+            transition: all 0.3s;
+        }
+        .btn-back:hover {
+            background-color: #e0ecff;
+            box-shadow: 0 2px 8px rgba(74, 137, 220, 0.15);
+        }
+        .btn-back::before {
+            content: '\f060';
+            font-family: 'Font Awesome 5 Free';
+            font-weight: 900;
+            margin-right: 8px;
+        }
+        /* 用户信息区域：绝对定位到页头右侧 */
+        #user-menu {
+            position: absolute;
+            right: 20px;
+            top: 50%;
+            transform: translateY(-50%);
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            padding: 8px 12px;
+            border-radius: 20px;
+            transition: all 0.3s;
+        }
+        #user-menu:hover {
+            background-color: #f0f5ff;
+        }
+        #user-menu::before {
+            content: '\f007';
+            font-family: 'Font Awesome 5 Free';
+            font-weight: 900;
+            margin-right: 8px;
+            color: #4a89dc;
+        }
+        #user-menu span {
+            font-weight: 500;
+            color: #4a5568;
+        }
+        /* 内容区域 */
+        #content {
+            padding: 30px;
+            padding-bottom: 80px; /* 避免与底部重叠 */
+        }
+        /* 表格样式优化 */
+        table#table, table#table th, table#table td {
+            text-align: center;
+            border: none;
+        }
+        .reponsetable {
+            border-radius: 8px;
+            overflow: hidden;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.05);
+            margin-bottom: 30px;
+        }
+        .reponsetable thead tr {
+            background-color: #4a89dc;
+            color: white;
+        }
+        .reponsetable thead th {
+            padding: 15px !important;
+            font-weight: 500;
+            border: none !important;
+        }
+        .reponsetable tbody tr {
+            background-color: white;
+            transition: all 0.2s;
+        }
+        .reponsetable tbody tr:hover {
+            background-color: #f0f5ff;
+        }
+        .reponsetable tbody td {
+            padding: 15px !important;
+            border-bottom: 1px solid #eee !important;
+            color: #4a5568;
+        }
+        .btn-standard {
+            padding: 10px 16px;
+            border: none;
+            border-radius: 6px;
+            color: #fff;
+            font-size: 14px;
+            cursor: pointer;
+            font-weight: 500;
+            transition: all 0.3s;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            min-width: 120px;
+            background-color: #4a89dc;
+        }
+        .btn-standard:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+        }
+        .btn-danger {
+            background-color: #e74c3c;
+        }
+        .btn-danger:hover {
+            background-color: #c0392b;
+        }
+        .btn-success {
+            background-color: #2ecc71;
+        }
+        .btn-success:hover {
+            background-color: #27ae60;
+        }
+        /* 按钮内图标 */
+        .btn-standard i {
+            margin-right: 5px;
+        }
+        /* 底部 */
+        #footer {
+            position: fixed;
+            bottom: 0;
+            left: 0;
+            width: 100%;
+            background-color: #fff;
+            text-align: center;
+            padding: 15px 0;
+            border-top: 1px solid #eee;
+            font-size: 14px;
+            color: #777;
+            box-shadow: 0 -2px 10px rgba(0, 0, 0, 0.05);
+        }
+        /* 卡片容器样式 */
+        .card-container {
+            background-color: white;
+            border-radius: 8px;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.05);
+            padding: 25px;
+            margin-bottom: 25px;
+        }
+        /* 无数据提示 */
+        #noDataMessage {
+            text-align: center;
+            padding: 50px 0;
+            font-size: 18px;
+            color: #7f8c8d;
+        }
+        #noDataMessage i {
+            font-size: 50px;
+            margin-bottom: 15px;
+            color: #dfe6e9;
+        }
+        /* 顶部操作区 */
+        .top-actions {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 20px;
+        }
+        /* 弹窗表单样式 */
+        .popup-form {
+            padding: 20px;
+        }
+        
+        .popup-form .form-group {
+            margin-bottom: 20px;
+        }
+        
+        .popup-form label {
+            display: block;
+            margin-bottom: 8px;
+            font-weight: 500;
+            color: #4a5568;
+        }
+        
+        .popup-form input {
+            width: 100%;
+            padding: 10px 15px;
+            border: 1px solid #ddd;
+            border-radius: 6px;
+            font-size: 15px;
+            transition: all 0.3s;
+            background-color: #f8f9fa;
+        }
+        
+        .popup-form input:focus {
+            border-color: #4a89dc;
+            box-shadow: 0 0 0 3px rgba(74, 137, 220, 0.1);
+            outline: none;
+            background-color: #fff;
+        }
+        
+        .popup-btn-container {
+            display: flex;
+            justify-content: flex-end;
+            gap: 10px;
+            margin-top: 20px;
+        }
+        
+        .popup-btn-container button {
+            padding: 8px 16px;
+            border: none;
+            border-radius: 4px;
+            font-weight: 500;
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+        
+        .popup-btn-container .cancel-btn {
+            background-color: #e0e0e0;
+            color: #4a5568;
+        }
+        
+        .popup-btn-container .save-btn {
+            background-color: #4a89dc;
+            color: white;
+        }
+        
+        .popup-btn-container button:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+        }
+        /* 用户信息区域：绝对定位到页头右侧 */
+        #user-menu {
+            position: absolute;
+            right: 20px;
+            top: 50%;
+            transform: translateY(-50%);
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            padding: 8px 12px;
+            border-radius: 20px;
+            transition: all 0.3s;
+        }
+        #user-menu:hover {
+            background-color: #f0f5ff;
+        }
+        #user-menu::before {
+            content: '\f007';
+            font-family: 'Font Awesome 5 Free';
+            font-weight: 900;
+            margin-right: 8px;
+            color: #4a89dc;
+        }
+        #user-menu span {
+            font-weight: 500;
+            color: #4a5568;
+        }
+        /* 下拉菜单 */
+        #dropdown {
+            display: none;
+            position: absolute;
+            right: 0;
+            top: 100%;
+            background-color: #fff;
+            border-radius: 8px;
+            border: none;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+            width: 150px;
+            z-index: 100;
+            overflow: hidden;
+            margin-top: 8px;
+        }
+        #dropdown a {
+            display: flex;
+            padding: 12px 16px;
+            text-decoration: none;
+            color: #4a5568;
+            transition: all 0.2s;
+            align-items: center;
+        }
+        #dropdown a:hover {
+            background-color: #f0f5ff;
+            color: #4a89dc;
+        }
+        #dropdown a::before {
+            font-family: 'Font Awesome 5 Free';
+            font-weight: 900;
+            margin-right: 8px;
+        }
+        #personalInfo::before {
+            content: '\f007';
+        }
+        #logout::before {
+            content: '\f2f5';
+        }
+        
+        /* 响应式调整 */
+        @media (max-width: 768px) {
+            .top-actions {
+                flex-direction: column;
+                gap: 15px;
+                align-items: flex-start;
+            }
+            
+            .btn-standard {
+                width: 100%;
+            }
+        }
+    </style>
+</head>
+<body>
+<!-- 页头 -->
+<div id="header">
+    <button class="btn-back" onclick="window.history.back();"></button>
+    <h1>Vision Pro Management</h1>
+    <div id="user-menu">
+        <span id="username"></span>
+        <div id="dropdown">
+            <a href="#" id="personalInfo">Personal Info</a>
+            <a href="#" id="logout">Logout</a>
+        </div>
+    </div>
+</div>
+
+<!-- 主体内容区域 -->
+<div class="content-container" id="content">
+    <div class="card-container">
+        <div class="top-actions">
+            <h3 style="margin: 0;">Vision Pro Devices</h3>
+            <button class="btn-standard btn-success" onclick="addVP();"><i class="fas fa-plus"></i> Add New Vision Pro</button>
+        </div>
+        
+        <!-- VP 信息表格 -->
+        <table id="table" class="reponsetable"></table>
+        
+        <!-- 无数据时显示的提示信息 -->
+        <div id="noDataMessage" style="display: none;">
+            <i class="fas fa-vr-cardboard"></i>
+            <p>No Vision Pro devices available.</p>
+            <button class="btn-standard btn-success" onclick="addVP();"><i class="fas fa-plus"></i> Add Vision Pro</button>
+        </div>
+    </div>
+    
+    <!-- 添加Vision Pro弹窗模板 -->
+    <script type="text/html" id="add-vp-form-template">
+        <div class="popup-form">
+            <div class="form-group">
+                <label for="vpId">Vision Pro ID</label>
+                <input type="text" id="vpId" placeholder="Enter Vision Pro ID" required>
+            </div>
+            <div class="popup-btn-container">
+                <button type="button" class="cancel-btn" onclick="layer.closeAll();">Cancel</button>
+                <button type="button" class="save-btn" onclick="saveNewVP();">Save</button>
+            </div>
+        </div>
+    </script>
+</div>
+
+<!-- 页脚 -->
+<div id="footer">
+    <div>Version 1.0 | Contact Us: (852) 53137630</div>
+    <div>©Copyright Ready Player One</div>
+</div>
+
+<!-- 引入相关 JavaScript 库 -->
+<script src="./js/jquery.min.js"></script>
+<script src="./js/jquery.basictable.min.js"></script>
+<script src="./js/reponsetable.min.js"></script>
+<script src="./layer/layer.js"></script>
+<script src="./js/config.js"></script>
+<script src="./js/common.js"></script>
+<script type="text/javascript">
+
+    // 根据 URL 查询参数获取指定参数值
+    function getQueryParam(param) {
+        var search = window.location.search.substring(1);
+        var params = search.split("&");
+        for (var i = 0; i < params.length; i++){
+            var pair = params[i].split("=");
+            if(pair[0] === param){
+                return decodeURIComponent(pair[1]);
+            }
+        }
+        return null;
+    }
+
+    $(function(){
+        const teacherName = sessionStorage.getItem("user_name");
+        $("#username").text(teacherName);
+        
+        // 用户菜单相关事件
+        $("#user-menu").click(function(e){
+            $("#dropdown").toggle();
+            e.stopPropagation();
+        });
+        $(document).click(function(){
+            $("#dropdown").hide();
+        });
+        
+        $("#personalInfo").click(function(e){
+            e.preventDefault();
+            window.location.href = "personal.html";
+        });
+        
+        $("#logout").click(function(e){
+            e.preventDefault();
+            sendAjaxRequest("/user/logout", "DELETE", {}, 
+                function() {
+                    window.location.href = "homepage.html";
+                },
+                function(error) {
+                    console.error("Logout error:", error);
+                    showErrorMessage("Logout failed. Please try again.");
+                }
+            );
+        });
+    });
+
+    $(function(){
+        // 初始化表格插件
+        $('#table').basictable({ breakpoint: 768 });
+        // 加载VP数据，通过 AJAX 请求接口，如果失败则采用示例数据
+        getVPData();
+    });
+
+    function getVPData(){
+        sendAjaxRequest("/vp/info", "POST", {
+            teacher_id: sessionStorage.getItem("user_id")
+        },
+            function(response) {
+                if (response.code === 200) {
+                    // 处理接口返回的数据
+                    var vpData = [];
+                    if (response && response.data.length > 0) {
+                        vpData = response.data;
+                        renderVPTable(vpData);
+                    } else {
+                            // 显示无数据提示
+                            $("#table").hide();
+                            $("#noDataMessage").show();
+                    }
+                }
+            },
+            function(error) {
+                console.log("Error fetching VP data:", error);
+            }
+        );
+    }
+
+    // 渲染VP数据表格
+    function renderVPTable(data) {
+        $("#noDataMessage").hide();
+        $("#table").show();
+        
+        var $table = $("#table");
+        $table.empty();
+        
+        // 创建表格基本结构
+        var tableHtml = '<thead><tr>' +
+            '<th>No.</th>' +
+            '<th>Vision Pro ID</th>' +
+            '<th>Owner</th>' +
+            '<th>Class</th>' +
+            '<th>Current State</th>' +
+            '<th>Operation</th>' +
+            '</tr></thead><tbody>';
+            
+        // 添加数据行
+        data.forEach(function(item, index) {
+            tableHtml += '<tr>' +
+                '<td>' + (index + 1) + '</td>' +
+                '<td>' + item.vp_id + '</td>' +
+                '<td>' + item.owner_name + '</td>' +
+                '<td>' + item.class + '</td>' +
+                '<td>' + item.curState + '</td>' +
+                '<td><button class="btn-standard btn-danger" onclick="deleteVP(\'' + item["Apple Vision Pro ID"] + '\')"><i class="fas fa-trash"></i> Delete</button></td>' +
+                '</tr>';
+        });
+        
+        tableHtml += '</tbody>';
+        $table.html(tableHtml);
+        
+        // 初始化响应式表格
+        $table.basictable({
+            breakpoint: 768,
+            contentWrap: true,
+            tableWrapper: false
+        });
+    }
+
+    // 删除VP记录
+    function deleteVP(vpId) {
+        layer.confirm('Are you sure you want to delete this Vision Pro device?', {
+            btn: ['Yes','Cancel'],
+            title: 'Confirm'
+
+        }, function(){
+            sendAjaxRequest("/vp/delete", "POST", { vp_id: vpId },
+                function(response) {
+                    if (response.code === 200) {
+                        layer.msg('Vision Pro deleted successfully', {icon: 1});
+                        // 删除成功后刷新VP数据
+                        setTimeout(function() {
+                            getVPData();
+                        }, 500);
+                    } else {
+                        layer.msg(response.message || 'Failed to delete Vision Pro', {icon: 2});
+                    }
+                },
+                function(error) {
+                    console.error("Error deleting Vision Pro:", error);
+                    layer.msg('Connection Error', {icon: 2});
+                }
+            );
+        });
+    }
+
+    // 新增VP记录
+    function addVP() {
+        layer.open({
+            type: 1,
+            title: 'Add New Vision Pro',
+            area: ['400px', 'auto'],
+            shadeClose: true,
+            content: $('#add-vp-form-template').html(),
+            success: function(layero) {
+                // 聚焦到输入框
+                $(layero).find('#vpId').focus();
+                
+                // 添加回车键提交表单
+                $(layero).find('input').keypress(function(e) {
+                    if(e.which === 13) {
+                        saveNewVP();
+                    }
+                });
+            }
+        });
+    }
+    
+    // 保存新的Vision Pro记录
+    function saveNewVP() {
+        const vpId = $('#vpId').val().trim();
+        if (!vpId) {
+            layer.msg('Vision Pro ID cannot be empty', {icon: 2});
+            return;
+        }
+        
+        const requestData = {
+            vp_id: vpId,
+        };
+        
+        sendAjaxRequest("/vp/add", "POST", requestData,
+            function(response) {
+                if (response.code === 200) {
+                    layer.msg('Vision Pro added successfully', {icon: 1});
+                    layer.closeAll('page'); // 关闭弹窗
+                    
+                    // 重新加载VP数据
+                    setTimeout(function() {
+                        getVPData();
+                    }, 500);
+                } else {
+                    layer.msg(response.message || 'Failed to add Vision Pro', {icon: 2});
+                }
+            },
+            function(error) {
+                console.error("Error adding Vision Pro:", error);
+                layer.msg('Connection Error', {icon: 2});
+            }
+        );
+    }
+</script>
+</body>
+</html>
